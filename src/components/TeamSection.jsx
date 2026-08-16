@@ -31,20 +31,20 @@ function Portrait({ photo, initials, name, index }) {
       <img
         src={photo}
         alt={`Headshot of ${name} — sample demonstration photography, not the actual business.`}
-        className="size-16 shrink-0 rounded-full object-cover sm:size-[4.5rem]"
+        className="size-24 shrink-0 rounded-full object-cover sm:size-28"
       />
     )
   }
 
   return (
     <div
-      className="flex size-16 shrink-0 items-center justify-center rounded-full sm:size-[4.5rem]"
+      className="flex size-24 shrink-0 items-center justify-center rounded-full sm:size-28"
       aria-hidden="true"
       style={{
         background: `radial-gradient(120% 120% at 30% 20%, color-mix(in oklab, ${tint} 26%, transparent), var(--color-surface) 75%)`,
       }}
     >
-      <span className="font-display text-lg font-semibold" style={{ color: tint }}>
+      <span className="font-display text-2xl font-semibold" style={{ color: tint }}>
         {initials}
       </span>
     </div>

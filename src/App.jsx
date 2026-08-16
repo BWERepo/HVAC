@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { services } from './data/site'
 
 import BusinessWebExpressCTA from './components/BusinessWebExpressCTA'
 import ComfortTransformation from './components/ComfortTransformation'
@@ -16,9 +15,7 @@ import MobileActionBar from './components/MobileActionBar'
 import ProblemSelector from './components/ProblemSelector'
 import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
-import ServiceExperience from './components/ServiceExperience'
 import ServiceGrid from './components/ServiceGrid'
-import FinalCTA from './components/FinalCTA'
 import SocialRail from './components/SocialRail'
 import TeamSection from './components/TeamSection'
 import TopBar from './components/TopBar'
@@ -54,15 +51,6 @@ export default function App() {
         <ProblemSelector onSchedule={openSheet} />
         <EmergencyCTA />
 
-        {services.map((service, i) => (
-          <ServiceExperience
-            key={service.id}
-            service={service}
-            index={i}
-            onSchedule={openSheet}
-          />
-        ))}
-
         <ServiceGrid />
         <EstimateWizard />
         <Testimonials />
@@ -71,7 +59,6 @@ export default function App() {
         <TeamSection />
         <MembershipSection onSchedule={openSheet} />
         <FinancingSection />
-        <FinalCTA onSchedule={openSheet} />
         <LeadForm />
       </main>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import heroFamilyPhoto from '../assets/hero-family.jpg'
 import { company, hero } from '../data/site'
-import { useCountUp, usePrefersReducedMotion } from '../lib/hooks'
+import { usePrefersReducedMotion } from '../lib/hooks'
 import Button from './ui/Button'
 import Icon from './ui/Icon'
 import Scene from './ui/Scene'
@@ -68,71 +68,6 @@ function Airflow() {
   )
 }
 
-/** The hero thermostat: settles on 72° shortly after load. */
-function ThermostatReadout() {
-  const reduced = usePrefersReducedMotion()
-  const [armed, setArmed] = useState(false)
-
-  useEffect(() => {
-    const t = setTimeout(() => setArmed(true), reduced ? 0 : 450)
-    return () => clearTimeout(t)
-  }, [reduced])
-
-  // Climbs the last few degrees rather than counting from zero — a thermostat
-  // settling, not a scoreboard.
-  const span = 6
-  const climbed = useCountUp(span, { duration: 2400, active: armed })
-  const temp = Math.round(hero.targetTemp - span + climbed)
-
-  return (
-    <div className="glass relative w-full max-w-sm rounded-[2rem] p-8 shadow-lift">
-      <div
-        aria-hidden="true"
-        className="absolute -inset-px rounded-[2rem] opacity-60"
-        style={{
-          background:
-            'radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--color-sun) 26%, transparent), transparent 62%)',
-        }}
-      />
-
-      <div className="relative flex items-center justify-between">
-        <span className="eyebrow">Living Room</span>
-        <span className="flex items-center gap-1.5 text-[0.7rem] font-medium text-fresh-deep">
-          <span className="relative flex size-1.5">
-            <span
-              className="absolute inline-flex size-full rounded-full bg-fresh"
-              style={{ animation: reduced ? undefined : 'pc-pulse-ring 2.4s ease-out infinite' }}
-            />
-            <span className="relative inline-flex size-1.5 rounded-full bg-fresh" />
-          </span>
-          Cooling
-        </span>
-      </div>
-
-      <div className="relative mt-6 flex items-start justify-center">
-        <span className="tnum font-display text-[7rem] leading-[0.85] font-light tracking-tighter text-ink">
-          {temp}
-        </span>
-        <span className="mt-3 font-display text-4xl font-light text-cool-deep">°</span>
-      </div>
-
-      <p className="relative mt-4 text-center text-sm text-ink-soft">{hero.tempCaption}</p>
-
-      {/* Dial track — visual only; the real interactive control is further down. */}
-      <div className="relative mt-7 h-1.5 overflow-hidden rounded-full bg-sunk-deep">
-        <div
-          className="h-full rounded-full bg-linear-to-r from-cool to-fresh transition-[width] duration-1000 ease-out"
-          style={{ width: armed ? '58%' : '30%' }}
-        />
-      </div>
-      <div className="relative mt-2 flex justify-between text-[0.68rem] text-ink-faint">
-        <span>65°</span>
-        <span>80°</span>
-      </div>
-    </div>
-  )
-}
-
 export default function Hero() {
   const reduced = usePrefersReducedMotion()
   const parallax = useParallax(0.18)
@@ -148,7 +83,7 @@ export default function Hero() {
           <Scene
             variant="home"
             ratio="auto"
-            className="h-full"
+            className="h-full opacity-55"
             priority
             src={heroFamilyPhoto}
             alt="A happy family relaxing together at home — sample demonstration photography, not the actual business."
@@ -163,12 +98,12 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 24%, color-mix(in oklab, var(--color-canvas) 42%, transparent) 40%, transparent 58%)',
+              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 18%, color-mix(in oklab, var(--color-canvas) 30%, transparent) 34%, transparent 52%)',
           }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-canvas/15 via-transparent to-canvas/65"
+          className="absolute inset-0 bg-linear-to-b from-canvas/10 via-transparent to-canvas/55"
         />
 
         <Airflow />
@@ -195,7 +130,7 @@ export default function Hero() {
       </span>
 
       <div className="u-container">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.32fr_0.68fr] lg:gap-8">
+        <div className="max-w-3xl">
           <div className="relative border-l-4 border-sun-deep/70 pl-6 sm:pl-8">
             <p
               className="eyebrow mb-6"
@@ -292,15 +227,6 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div
-            className="flex justify-center lg:translate-y-8 lg:justify-end lg:-rotate-1"
-            style={{
-              animation: reduced ? undefined : 'pc-rise 1000ms var(--ease-out-soft) 420ms both',
-            }}
-          >
-            <ThermostatReadout />
           </div>
         </div>
       </div>

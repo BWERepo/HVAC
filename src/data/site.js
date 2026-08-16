@@ -32,7 +32,7 @@ export const company = {
   // PLACEHOLDER — not a real contractor licence.
   license: 'Contractor Licence #000000 (placeholder)',
 
-  region: 'the Cedar Valley area',
+  region: 'the Knoxville area',
   hours: 'Emergency service available 24 hours a day, 7 days a week',
 }
 
@@ -59,7 +59,7 @@ export const socials = [
 ]
 
 export const nav = [
-  { label: 'Services', href: '#cooling' },
+  { label: 'Services', href: '#all-services' },
   { label: 'Maintenance', href: '#membership' },
   { label: 'Financing', href: '#financing' },
   { label: 'Reviews', href: '#testimonials' },
@@ -78,65 +78,6 @@ export const hero = {
   primaryCta: { label: 'Schedule Service', href: '#estimate' },
   secondaryCta: { label: 'Call Now', href: '#emergency' },
 }
-
-/**
- * The three service pillars. `accent` drives the section's colour temperature
- * so the page warms up through Heating and cools through AC without ever
- * leaving the brand palette.
- */
-export const services = [
-  {
-    id: 'cooling',
-    headline: 'COOL IT.',
-    focus: 'Air Conditioning',
-    accent: 'cool',
-    blurb:
-      'Even temperatures in every room, quiet operation, and equipment sized properly for your home — not for whatever fit in the truck.',
-    items: [
-      { label: 'AC Repair', detail: 'Fast diagnosis and same-day fixes for a system that won’t keep up.' },
-      { label: 'AC Replacement', detail: 'A properly sized system, installed cleanly, for the long haul.' },
-      { label: 'Preventive Maintenance', detail: 'Seasonal tune-ups that catch small issues before they grow.' },
-      { label: 'High-Efficiency Systems', detail: 'Modern equipment that cools more while running less.' },
-      { label: 'Smart Thermostats', detail: 'Precise, app-connected control over every room.' },
-    ],
-    cta: 'Keep Me Cool',
-    ctaSub: 'Schedule Cooling Service',
-  },
-  {
-    id: 'heating',
-    headline: 'WARM IT.',
-    focus: 'Heating',
-    accent: 'warm',
-    blurb:
-      'Reliable heat when the temperature drops, from same-day furnace repair to modern heat pumps that stay efficient through the cold months.',
-    items: [
-      { label: 'Furnace Repair', detail: 'Same-day diagnosis and repair when the heat won’t come on.' },
-      { label: 'Heat Pumps', detail: 'Efficient heating and cooling from a single system.' },
-      { label: 'Heating Installation', detail: 'New equipment sized and installed for your actual home.' },
-      { label: 'Heating Maintenance', detail: 'A seasonal check-up before the cold months arrive.' },
-      { label: 'High-Efficiency Heating', detail: 'Modern furnaces that stay efficient through deep cold.' },
-    ],
-    cta: 'Warm My Home',
-    ctaSub: 'Schedule Heating Service',
-  },
-  {
-    id: 'air-quality',
-    headline: 'CLEAN IT.',
-    focus: 'Indoor Air Quality',
-    accent: 'fresh',
-    blurb:
-      'Dust, allergens, humidity and stale air are comfort problems too. We treat the air itself, not just its temperature.',
-    items: [
-      { label: 'Air Purification', detail: 'Active purification that reduces airborne allergens and odors.' },
-      { label: 'Whole-Home Filtration', detail: 'Cleaner air delivered through your existing ductwork.' },
-      { label: 'Humidity Control', detail: 'Balanced humidity so the air feels right, not sticky or dry.' },
-      { label: 'Dehumidification', detail: 'Targeted moisture removal for damp rooms and basements.' },
-      { label: 'Duct Services', detail: 'Cleaning and sealing so conditioned air isn’t wasted in transit.' },
-    ],
-    cta: 'Improve My Air',
-    ctaSub: 'Schedule Air Quality Service',
-  },
-]
 
 /**
  * The site's signature moment: three big, unmissable choices right under the
@@ -171,12 +112,10 @@ export const quickHelp = {
 }
 
 /**
- * Full service catalog — the 3 `services` pillars above stay as the
- * immersive alternating sections; this extends coverage to the fuller list
- * from the brief as a secondary, denser grid (Air Conditioning / Heating /
- * Heat Pumps / Mini Splits / Indoor Air Quality / Maintenance / Emergency).
- * `size` drives an asymmetric bento layout so the grid doesn't read as
- * equal-size generic cards.
+ * The full service catalog (Air Conditioning / Heating / Heat Pumps / Mini
+ * Splits / Indoor Air Quality / Maintenance / Emergency) — the primary
+ * services showcase on the page. `size` drives an asymmetric bento layout so
+ * the grid doesn't read as equal-size generic cards.
  */
 export const serviceCatalog = [
   {
@@ -187,7 +126,7 @@ export const serviceCatalog = [
     what: 'Repair, replacement and installation for central AC systems.',
     benefit: 'Even cooling in every room, sized right for your home.',
     cta: 'Explore AC Service',
-    href: '#cooling',
+    href: '#estimate',
     size: 'lg',
   },
   {
@@ -198,7 +137,7 @@ export const serviceCatalog = [
     what: 'Furnace repair, installation and seasonal heating maintenance.',
     benefit: 'Dependable warmth through the coldest months.',
     cta: 'Explore Heating',
-    href: '#heating',
+    href: '#estimate',
     size: 'lg',
   },
   {
@@ -231,7 +170,7 @@ export const serviceCatalog = [
     what: 'Filtration, purification, humidity control and duct services.',
     benefit: 'Air that feels as good as the temperature.',
     cta: 'Improve My Air',
-    href: '#air-quality',
+    href: '#estimate',
     size: 'md',
   },
   {
@@ -435,31 +374,31 @@ export const testimonials = [
     quote:
       'Called first thing in the morning when the AC quit and someone was here before lunch. The tech explained what failed and what it would cost before touching anything.',
     name: 'Dana R.',
-    detail: 'Cedar Ridge · AC Repair',
+    detail: 'Knoxville · AC Repair',
   },
   {
     quote:
       'They put down floor protection, cleaned up completely, and walked me through the new thermostat twice because I asked. The install looks better than the old one ever did.',
     name: 'Marcus T.',
-    detail: 'Lakemont · System Replacement',
+    detail: 'Maryville · System Replacement',
   },
   {
     quote:
       'Our upstairs was always about five degrees warmer than downstairs. After the duct work and the new system, it finally feels like one house.',
     name: 'Priya S.',
-    detail: 'Northgate · Duct & Replacement',
+    detail: 'Sevierville · Duct & Replacement',
   },
   {
     quote:
       'The bill dropped noticeably over the first summer. Not a miracle, but a real difference, and they set expectations honestly up front.',
     name: 'Ellen W.',
-    detail: 'Brookfield · High-Efficiency Upgrade',
+    detail: 'Oak Ridge · High-Efficiency Upgrade',
   },
   {
     quote:
       'What I appreciated most was the communication — text when they were on the way, photos of what they found, and no pressure to buy anything extra.',
     name: 'Tomas L.',
-    detail: 'Stonebrook · Maintenance Plan',
+    detail: 'Knoxville · Maintenance Plan',
   },
 ]
 
@@ -488,16 +427,7 @@ export const transformation = {
 }
 
 // PLACEHOLDER — invented service areas, replace with the customer's real ones.
-export const serviceAreas = [
-  'Cedar Ridge',
-  'Lakemont',
-  'Northgate',
-  'Brookfield',
-  'Stonebrook',
-  'Fairhaven',
-  'Westport Hills',
-  'Miller’s Crossing',
-]
+export const serviceAreas = ['Knoxville', 'Maryville', 'Sevierville', 'Oak Ridge']
 
 // PLACEHOLDER — invented staff. Replace with the customer's real team.
 // `photo` is an optional imported image (see Hero.jsx's heroFamilyPhoto for
@@ -608,14 +538,6 @@ export const scheduleSheet = {
   timingOptions: ['ASAP', 'Today', 'Tomorrow', 'This Week'],
 }
 
-export const finalCta = {
-  title: 'Your Home Should Feel Comfortable Again.',
-  sub: 'Whether it’s a repair, a replacement or a system you’ve been meaning to look into, our team is ready when you are.',
-  primaryCta: { label: 'Schedule Service' },
-  secondaryCta: { label: 'Call Now' },
-  trust: ['Licensed & Insured', 'Upfront Pricing', '24/7 Emergency Service', 'Locally Trusted'],
-}
-
 export const bwe = {
   name: 'Business Web Express',
   url: 'https://businesswebexpress.com',
@@ -640,9 +562,9 @@ export const footerColumns = [
   {
     title: 'Services',
     links: [
-      { label: 'Heating', href: '#heating' },
-      { label: 'Cooling', href: '#cooling' },
-      { label: 'Indoor Air Quality', href: '#air-quality' },
+      { label: 'Heating', href: '#all-services' },
+      { label: 'Cooling', href: '#all-services' },
+      { label: 'Indoor Air Quality', href: '#all-services' },
       { label: 'Maintenance', href: '#membership' },
       { label: 'Emergency Service', href: '#emergency' },
       { label: 'Financing', href: '#lead-form' },
