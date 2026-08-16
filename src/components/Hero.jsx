@@ -135,7 +135,7 @@ export default function Hero() {
           <div className="relative border-l-4 border-sun-deep/70 pl-6 sm:pl-8">
             <h1
               className="text-[clamp(2.6rem,7.6vw,5.75rem)] font-bold"
-              style={{ letterSpacing: '-0.045em' }}
+              style={{ fontFamily: 'var(--font-hero)', letterSpacing: '-0.01em' }}
             >
               {hero.headline.map((line, i) => (
                 <span

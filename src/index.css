@@ -14,9 +14,13 @@
    ========================================================================== */
 
 @theme {
-  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+  /* High-contrast display serif reserved for the hero headline — a
+     deliberately more expensive, editorial moment than the rest of the
+     UI's workhorse sans, not a sitewide swap. */
+  --font-hero: 'Bodoni Moda', 'Fraunces', ui-serif, Georgia, serif;
 
   /* Surfaces — page ground upward */
   --color-canvas: #fdfbf7; /* warm white page */

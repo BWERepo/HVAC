@@ -15,6 +15,7 @@ import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
 import FieldPhotos from './components/FieldPhotos'
 import ServiceGrid from './components/ServiceGrid'
+import ScrollJump from './components/ScrollJump'
 import SocialRail from './components/SocialRail'
 import TeamSection from './components/TeamSection'
 import TopBar from './components/TopBar'
@@ -42,6 +43,7 @@ export default function App() {
       <TopBar />
       <Header onSchedule={openSheet} />
       <SocialRail />
+      <ScrollJump />
 
       <main id="main">
         <Hero />
