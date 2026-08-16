@@ -132,15 +132,6 @@ export default function Hero() {
       <div className="u-container">
         <div className="max-w-3xl">
           <div className="relative border-l-4 border-sun-deep/70 pl-6 sm:pl-8">
-            <p
-              className="eyebrow mb-6"
-              style={{
-                animation: reduced ? undefined : 'pc-rise 700ms var(--ease-out-soft) both',
-              }}
-            >
-              {company.region.replace('the ', '')} · Since day one
-            </p>
-
             <h1
               className="text-[clamp(2.6rem,7.6vw,5.75rem)] font-bold"
               style={{ letterSpacing: '-0.045em' }}

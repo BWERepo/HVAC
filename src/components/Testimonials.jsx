@@ -142,10 +142,6 @@ export default function Testimonials() {
           ))}
         </ul>
       </Reveal>
-
-      <p className="mt-6 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
-        Sample demonstration content
-      </p>
     </Section>
   )
 }

@@ -77,10 +77,6 @@ export default function TeamSection() {
           </Reveal>
         ))}
       </ul>
-
-      <p className="mt-10 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
-        Sample demonstration content
-      </p>
     </Section>
   )
 }

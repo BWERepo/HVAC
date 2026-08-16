@@ -516,8 +516,8 @@ export const efficiency = {
 }
 
 export const leadForm = {
-  title: 'Ready to Feel Comfortable Again?',
-  sub: 'Tell us what’s going on and how you’d like to be reached. We’ll take it from there.',
+  title: 'Book Your Appointment Online',
+  sub: 'Pick a date and time that works for you — no phone call required.',
   helpOptions: [
     'No cooling',
     'No heat',
@@ -526,8 +526,9 @@ export const leadForm = {
     'Indoor air quality',
     'Something else',
   ],
+  timeWindowOptions: ['Morning (8–11am)', 'Afternoon (12–4pm)', 'Evening (4–7pm)'],
   contactMethods: ['Call', 'Text', 'Email'],
-  cta: 'Get My Comfort Plan',
+  cta: 'Book My Appointment',
 }
 
 export const scheduleSheet = {

@@ -34,6 +34,15 @@ const rules = {
     return null
   },
 
+  date: (v) => {
+    if (!v) return 'Please choose a date for your appointment.'
+    const chosen = new Date(`${v}T00:00:00`)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    if (chosen < today) return 'That date has already passed — please choose today or a later date.'
+    return null
+  },
+
   help: (v) => (v ? null : 'Please choose what you need help with.'),
   need: (v) => (v ? null : 'Please choose what you need help with.'),
   timing: (v) => (v ? null : 'Please choose when you would like us to come out.'),

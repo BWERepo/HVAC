@@ -7,7 +7,7 @@ import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Section, { SectionHeading } from './ui/Section'
 
-const FIELDS = ['name', 'phone', 'email', 'zip', 'help', 'contact']
+const FIELDS = ['name', 'phone', 'email', 'zip', 'help', 'date', 'timing', 'contact']
 
 const EMPTY = {
   name: '',
@@ -15,8 +15,23 @@ const EMPTY = {
   email: '',
   zip: '',
   help: '',
+  date: '',
+  timing: '',
   contact: 'Call',
   notes: '',
+}
+
+// Native date inputs need an ISO min bound — today, in the visitor's local time.
+function todayIso() {
+  const d = new Date()
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset())
+  return d.toISOString().slice(0, 10)
+}
+
+function formatAppointment(isoDate) {
+  if (!isoDate) return 'Your appointment'
+  const date = new Date(`${isoDate}T00:00:00`)
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
 }
 
 export default function LeadForm() {
@@ -82,14 +97,14 @@ export default function LeadForm() {
         <div>
           <SectionHeading
             align="left"
-            eyebrow="Request service"
+            eyebrow="Book online"
             title={leadForm.title}
             sub={leadForm.sub}
           />
 
           <ul className="mt-10 space-y-5">
             {[
-              { icon: 'clock', text: 'We confirm the appointment window before we dispatch.' },
+              { icon: 'calendar', text: 'Pick a date and time slot right here — no callback needed.' },
               { icon: 'shield', text: 'Upfront pricing — you approve the work before it starts.' },
               { icon: 'phone', text: `Prefer to talk? Call ${company.phone} any time.` },
             ].map((item) => (
@@ -115,11 +130,11 @@ export default function LeadForm() {
                     <Icon name="check" size={32} strokeWidth={2} />
                   </span>
                   <h3 className="mt-6 font-display text-2xl font-semibold text-ink">
-                    Thanks, {values.name.split(' ')[0]} — we’ve got it.
+                    Thanks, {values.name.split(' ')[0]} — you’re booked.
                   </h3>
                   <p className="mx-auto mt-3 max-w-sm text-ink-soft">
-                    A coordinator would normally reach out by {values.contact.toLowerCase()} shortly
-                    to confirm your appointment window.
+                    {formatAppointment(values.date)}, {values.timing.toLowerCase()}. A coordinator
+                    would normally confirm by {values.contact.toLowerCase()} shortly before the visit.
                   </p>
 
                   <p className="mx-auto mt-6 max-w-sm rounded-xl border border-line bg-sunk/70 p-4 text-xs leading-relaxed text-ink-faint">
@@ -211,6 +226,44 @@ export default function LeadForm() {
                       size={18}
                       className="pointer-events-none absolute top-[2.85rem] right-4 text-ink-faint"
                     />
+                  </div>
+
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <Field
+                      label="Preferred date"
+                      data-field="date"
+                      type="date"
+                      min={todayIso()}
+                      value={values.date}
+                      onChange={set('date')}
+                      onBlur={onBlur('date')}
+                      error={touched.date ? errors.date : undefined}
+                    />
+                    <div className="relative">
+                      <Field
+                        as="select"
+                        label="Preferred time"
+                        data-field="timing"
+                        value={values.timing}
+                        onChange={set('timing')}
+                        onBlur={onBlur('timing')}
+                        error={touched.timing ? errors.timing : undefined}
+                      >
+                        <option value="" disabled>
+                          Choose a window…
+                        </option>
+                        {leadForm.timeWindowOptions.map((option) => (
+                          <option key={option} value={option} className="bg-surface">
+                            {option}
+                          </option>
+                        ))}
+                      </Field>
+                      <Icon
+                        name="chevronDown"
+                        size={18}
+                        className="pointer-events-none absolute top-[2.85rem] right-4 text-ink-faint"
+                      />
+                    </div>
                   </div>
 
                   <ChoiceGroup

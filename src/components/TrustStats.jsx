@@ -126,11 +126,6 @@ export default function TrustStats() {
               <Stat key={stat.label} stat={stat} active={inView} index={i} />
             ))}
           </div>
-
-          {/* Required honesty: these numbers are invented for the demonstration. */}
-          <p className="mt-14 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
-            Sample demonstration content
-          </p>
         </div>
       </div>
     </section>
