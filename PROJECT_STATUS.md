@@ -2,16 +2,74 @@
 
 Last updated: 2026-08-16 (end of session).
 
-**This session took the site from a good HVAC template to a premium, high-conversion
-showcase** — real stock photography, a rebuilt 4-step conversion flow, a new type
-system, and a full page-length trim, driven by a long back-and-forth design review.
-Live at **<https://hvac.businesswebexpress.com>**, repo
-**<https://github.com/BWERepo/HVAC>** (`main`) at commit `45afde6`, currently **v1.0.0**
-(Version ID `8c110b26-4001-4fc4-b3b0-47e2af719441`) — the version number was bumped
-straight to 1.0.0 to mark this session's redesign as the milestone release, skipping the
-usual patch increment. 16 commits landed this session (`bb4d162` → `45afde6`), each one
-built → deployed → committed → pushed in sequence per the user's standing "always
-deploy after changes" preference — the live site should always match `main`.
+**This session followed up the v1.0.0 redesign milestone with a targeted mobile-formatting
+review and fix pass** — a background-agent audit of the whole `src/components/` tree for
+small-screen layout bugs, followed by four incremental checkpoints fixing everything it
+found. Live at **<https://hvac.businesswebexpress.com>**, repo
+**<https://github.com/BWERepo/HVAC>** (`main`) at commit `b3b6fbf`, currently **v1.0.3**
+(Version ID `c9aad14c-cddb-41c2-ab2b-12ced0454c62`). 3 checkpoint commits landed this
+session (`ea7c561` → `b3b6fbf`), each one built → deployed → committed → pushed per the
+user's standing "always deploy after changes" preference — the live site should always
+match `main`.
+
+---
+
+## This session's work (2026-08-16, continuing from v1.0.0)
+
+A background `Explore`-style agent reviewed every file in `src/components/` and
+`src/components/ui/` plus `src/index.css` specifically for mobile (<640px) layout bugs —
+no prior mobile-review notes existed, so this was a fresh, thorough pass. It flagged five
+issues; the four real ones were fixed and shipped across three checkpoints (the fifth,
+"ScrollJump reserves dead space before the mobile action bar becomes visible," was
+initially left as low-priority/cosmetic per the agent's own note, then fixed anyway on
+direct follow-up request).
+
+1. **`ea7c561` v1.0.1 — Thermostat clipping, ScrollJump safe-area, schedule sheet
+   columns.** Three fixes bundled in one checkpoint:
+   - **`InteractiveThermostat.jsx`** — the draggable dial was fixed at `size-[19rem]`
+     (304px) on *all* screens. `u-container` padding leaves only ~280px of content width
+     on a 320–375px phone, so the dial (the site's signature interactive feature) was
+     wider than its container and got visually clipped at the edges. Fixed to
+     `size-64 sm:size-[19rem] lg:size-[23rem]` so it scales down below `sm:`.
+   - **`ScrollJump.jsx`** — the fixed jump buttons' bottom offset
+     (`bottom-[calc(76px+1.25rem)]`) didn't account for
+     `env(safe-area-inset-bottom)`, which `MobileActionBar.jsx` adds as real padding on
+     notched/home-indicator iPhones. That let the two fixed elements collide on those
+     devices. Fixed by adding the safe-area term to the offset calc.
+   - **`ScheduleBottomSheet.jsx`** — the "Preferred timing" step's 4 buttons
+     (ASAP/Today/Tomorrow/This Week) used an unconditional `grid-cols-4`, cramped on
+     320–375px sheets. Changed to `grid-cols-2 sm:grid-cols-4`.
+   - Version bumped 1.0.0 → 1.0.1 (patch). Build clean, deployed, Version ID
+     `13483012-c2cc-4266-8a78-ecc7c5856b1d`.
+2. **`16ef54f` v1.0.2 — `FieldPhotos.jsx` mobile grid.** The 3 "in the field" technician
+   photos used `grid gap-5 sm:grid-cols-3` with no base-tier column count, so on mobile
+   they stacked full-width one-per-row — a long image-heavy scroll stretch. Changed to
+   `grid-cols-2 gap-5 sm:grid-cols-3`, with the 3rd photo spanning both columns below
+   `sm:` via a conditional `className` passed through `Reveal`'s existing `className`
+   prop (`Reveal` forwards it straight onto its wrapper `Tag`, confirmed by reading
+   `ui/Reveal.jsx` before relying on it). Version 1.0.1 → 1.0.2. Deployed, Version ID
+   `31e87ec0-88c6-4c54-b398-49e9241bf9da`.
+3. **`b3b6fbf` v1.0.3 — `ScrollJump.jsx` dead-space fix.** The buttons always reserved
+   the `MobileActionBar` clearance in their bottom offset, even before the bar becomes
+   visible — `MobileActionBar` stays translated off-screen (`translate-y-full`) until
+   520px of scroll (`useScrolled(520)` in `lib/hooks.js`). Below that threshold,
+   ScrollJump was leaving unnecessary dead space at the bottom of the screen. Fixed by
+   calling the same `useScrolled(520)` hook in `ScrollJump.jsx` and switching the offset
+   class conditionally (`bottom-5` before the bar appears, the safe-area-aware calc
+   after), with a `transition-[bottom] duration-300` so the shift is smooth rather than
+   a jump. Version 1.0.2 → 1.0.3. Deployed, Version ID
+   `c9aad14c-cddb-41c2-ab2b-12ced0454c62`.
+
+**Not touched:** the review found no z-index conflicts among the fixed elements
+(`SocialRail` desktop-only, `Header`/`TopBar` at `z-30`/`z-40`, `MobileActionBar`/
+`ScrollJump` at `z-40` mobile-only, overlays at `z-50`), and touch targets across
+`LeadForm.jsx`, `ProblemSelector.jsx`, and `ui/Field.jsx` were already consistently
+≥44–56px — no action needed there.
+
+**Per standing user preference, no in-agent browser verification was attempted** —
+these are visual layout fixes, confirmed by reading the actual computed constraints
+(container padding, dial size, safe-area padding) rather than screenshots. Worth a
+manual phone check next session if there's any doubt.
 
 The site's purpose is commercial, not informational: Business Web Express shows it to
 HVAC company owners whose own sites look dated, so **every section is meant to
@@ -312,6 +370,9 @@ the custom domain `hvac.businesswebexpress.com`.
 
 ## Deploy history (most recent first)
 
+- `b3b6fbf` — v1.0.3, deployed, Version ID `c9aad14c-cddb-41c2-ab2b-12ced0454c62`
+- `16ef54f` — v1.0.2, deployed, Version ID `31e87ec0-88c6-4c54-b398-49e9241bf9da`
+- `ea7c561` — v1.0.1, deployed, Version ID `13483012-c2cc-4266-8a78-ecc7c5856b1d`
 - `45afde6` — v1.0.0 / v0.6.1 (both bumps landed in this one commit), deployed twice,
   Version IDs `8c110b26-4001-4fc4-b3b0-47e2af719441` (v1.0.0, live) and
   `9748917d-a1f3-4196-82ba-3e24bf922367` (v0.6.1, superseded) ← **live**
