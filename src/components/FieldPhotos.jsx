@@ -21,9 +21,9 @@ export default function FieldPhotos() {
         sub="A look at the kind of hands-on, detail-focused work every visit gets."
       />
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-3">
+      <div className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3">
         {photos.map((photo, i) => (
-          <Reveal key={photo.src} delay={i * 90}>
+          <Reveal key={photo.src} delay={i * 90} className={i === 2 ? 'col-span-2 sm:col-span-1' : undefined}>
             <img
               src={photo.src}
               alt={photo.alt}
