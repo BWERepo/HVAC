@@ -83,27 +83,28 @@ export default function Hero() {
           <Scene
             variant="home"
             ratio="auto"
-            className="h-full opacity-55"
+            className="h-full opacity-70"
             priority
             src={heroFamilyPhoto}
             alt="A happy family relaxing together at home — sample demonstration photography, not the actual business."
           />
         </div>
 
-        {/* Legibility scrim — solid only behind the text column on the left,
-            clearing quickly so the photo reads clearly on the right two
-            thirds of the hero rather than washing out everywhere. */}
+        {/* Legibility scrim — solid behind the full text column (headline
+            through the proof line) so nothing has to fight busy photo detail
+            underneath it, clearing out over the right side where there's no
+            text sitting on top of the photo. */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 18%, color-mix(in oklab, var(--color-canvas) 30%, transparent) 34%, transparent 52%)',
+              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 42%, color-mix(in oklab, var(--color-canvas) 55%, transparent) 58%, transparent 78%)',
           }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-canvas/10 via-transparent to-canvas/55"
+          className="absolute inset-0 bg-linear-to-b from-canvas/25 via-transparent to-canvas/70"
         />
 
         <Airflow />
