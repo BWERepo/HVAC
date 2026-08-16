@@ -278,16 +278,16 @@ export default function Hero() {
             </a>
 
             <ul
-              className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-faint"
+              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2.5"
               style={{
                 animation: reduced
                   ? undefined
                   : 'pc-rise 900ms var(--ease-out-soft) 840ms both',
               }}
             >
-              {hero.serviceLine.map((item, i) => (
-                <li key={item} className="flex items-center gap-3">
-                  {i > 0 && <span aria-hidden="true" className="text-sun-deep/50">•</span>}
+              {hero.proofLine.map((item) => (
+                <li key={item} className="flex items-center gap-1.5 text-sm font-medium text-ink-soft">
+                  <Icon name="check" size={15} className="shrink-0 text-fresh-deep" />
                   <span>{item}</span>
                 </li>
               ))}

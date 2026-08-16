@@ -1,58 +1,97 @@
-import { useState } from 'react'
-import { company, problems } from '../data/site'
+import { useRef, useState } from 'react'
+import { company, quickHelp } from '../data/site'
+import { formatPhone, validateAll, validateField } from '../lib/validation'
 import Button from './ui/Button'
+import Field from './ui/Field'
 import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Section, { SectionHeading } from './ui/Section'
 
+const FIELDS = ['name', 'phone', 'zip']
+const EMPTY = { name: '', phone: '', zip: '' }
+
 /**
- * The qualifying step: a homeowner who cannot name their problem still knows
- * what they are experiencing. Selecting a symptom turns a vague visit into a
- * described lead — and routes true emergencies to the phone instead of a form.
+ * The site's signature feature: three big, unmissable symptom choices right
+ * under the hero. Selecting one reveals a 3-field lead-capture form in
+ * place — proof that this page can turn "I have a problem" straight into a
+ * service call, not just decoration.
  */
-export default function ProblemSelector({ onSchedule }) {
+export default function ProblemSelector() {
   const [selectedId, setSelectedId] = useState(null)
-  const selected = problems.find((p) => p.id === selectedId) ?? null
+  const [values, setValues] = useState(EMPTY)
+  const [errors, setErrors] = useState({})
+  const [status, setStatus] = useState('idle') // idle | submitting | success
+  const formRef = useRef(null)
+
+  const selected = quickHelp.options.find((o) => o.id === selectedId) ?? null
+
+  const choose = (id) => {
+    setSelectedId((current) => (current === id ? null : id))
+    setValues(EMPTY)
+    setErrors({})
+    setStatus('idle')
+  }
+
+  const set = (field) => (e) => {
+    const raw = e.target.value
+    const value = field === 'phone' ? formatPhone(raw) : raw
+    setValues((v) => ({ ...v, [field]: value }))
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: validateField(field, value) || undefined }))
+    }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const found = validateAll(values, FIELDS)
+    setErrors(found)
+
+    if (Object.keys(found).length) {
+      const firstInvalid = FIELDS.find((f) => found[f])
+      formRef.current?.querySelector(`[data-field="${firstInvalid}"]`)?.focus()
+      return
+    }
+
+    setStatus('submitting')
+    // PROTOTYPE: nothing is transmitted — no backend is configured for this
+    // demonstration. Wiring this to a real CRM/dispatch endpoint is a
+    // deliberate, separate step for a live build.
+    setTimeout(() => setStatus('success'), 600)
+  }
 
   return (
     <Section id="diagnostic" accent="cool">
-      <SectionHeading
-        eyebrow="Quick help"
-        title="What’s Happening in Your Home?"
-        sub="Tell us what you’re experiencing and we’ll point you in the right direction — no guesswork, no diagnosis, just a next step."
-      />
+      <SectionHeading eyebrow={quickHelp.eyebrow} title={quickHelp.title} sub={quickHelp.sub} />
 
-      <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {problems.map((problem, i) => {
-          const isActive = selectedId === problem.id
+      <div className="mt-12 grid gap-4 sm:grid-cols-3">
+        {quickHelp.options.map((option, i) => {
+          const isActive = selectedId === option.id
           return (
-            <Reveal key={problem.id} delay={i * 45}>
+            <Reveal key={option.id} delay={i * 70}>
               <button
                 type="button"
                 aria-pressed={isActive}
-                onClick={() => setSelectedId(isActive ? null : problem.id)}
-                className={`group flex h-full w-full cursor-pointer flex-col items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-300 ${
+                onClick={() => choose(option.id)}
+                className={`group flex h-full w-full cursor-pointer flex-col items-center gap-4 rounded-2xl border p-8 text-center transition-all duration-300 ${
                   isActive
-                    ? problem.emergency
+                    ? option.emergency
                       ? 'border-alert-deep bg-alert/10'
                       : 'border-cool bg-cool/10'
-                    : 'border-line bg-sunk/70 hover:-translate-y-1 hover:border-line-strong hover:bg-sunk'
+                    : 'border-line bg-sunk/70 hover:-translate-y-1.5 hover:border-line-strong hover:bg-sunk'
                 }`}
               >
                 <span
-                  className={`flex size-11 items-center justify-center rounded-xl transition-colors ${
+                  className={`flex size-14 items-center justify-center rounded-2xl transition-colors ${
                     isActive
-                      ? problem.emergency
+                      ? option.emergency
                         ? 'bg-alert/20 text-alert-deep'
                         : 'bg-cool/20 text-cool-deep'
                       : 'bg-sunk/70 text-ink-soft group-hover:text-cool-deep'
                   }`}
                 >
-                  <Icon name={problem.icon} size={22} />
+                  <Icon name={option.icon} size={28} />
                 </span>
-                <span className="font-display text-[1.05rem] leading-snug font-semibold text-ink">
-                  {problem.label}
-                </span>
+                <span className="font-display text-xl font-semibold text-ink">{option.label}</span>
               </button>
             </Reveal>
           )
@@ -62,55 +101,94 @@ export default function ProblemSelector({ onSchedule }) {
       {/* Contextual response — replaces in place, never reloads. */}
       <div aria-live="polite" className="mt-8">
         {selected && (
-            <div
-              // Keying on the answer remounts the panel, which replays the
-              // entrance animation — no presence tracking required.
-              key={selected.id}
-              style={{ animation: 'pc-rise 340ms var(--ease-out-soft) both' }}
-              className={`glass overflow-hidden rounded-[var(--radius-card)] border p-8 sm:p-10 ${
-                selected.emergency ? 'border-alert-deep/50' : 'border-cool/40'
-              }`}
-            >
-              <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
-                <div className="flex-1">
-                  {selected.emergency && (
-                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-alert/15 px-3 py-1.5 text-xs font-semibold tracking-wide text-alert-deep uppercase">
-                      <Icon name="alert" size={14} />
-                      Emergency service
-                    </span>
-                  )}
-                  <h3
-                    className={`font-display text-2xl font-semibold sm:text-3xl ${
-                      selected.emergency ? 'text-alert-deep' : 'text-ink'
-                    }`}
-                  >
-                    {selected.verdict}
-                  </h3>
-                  <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">{selected.detail}</p>
-                </div>
-
-                <div className="flex shrink-0 flex-col gap-3">
-                  {selected.emergency ? (
-                    <>
-                      <Button
-                        as="a"
-                        href={company.phoneHref}
-                        variant="danger"
-                        size="lg"
-                        icon="phone"
-                      >
-                        Get Emergency Help
-                      </Button>
-                      <p className="text-center text-xs text-ink-faint">{company.phone}</p>
-                    </>
-                  ) : (
-                    <Button size="lg" onClick={onSchedule} iconRight="arrowRight">
-                      Schedule a Technician
-                    </Button>
-                  )}
-                </div>
+          <div
+            // Keying on the answer remounts the panel, which replays the
+            // entrance animation — no presence tracking required.
+            key={selected.id}
+            style={{ animation: 'pc-rise 340ms var(--ease-out-soft) both' }}
+            className={`glass mx-auto max-w-2xl overflow-hidden rounded-[var(--radius-card)] border p-8 sm:p-10 ${
+              selected.emergency ? 'border-alert-deep/50' : 'border-cool/40'
+            }`}
+          >
+            {status === 'success' ? (
+              <div className="flex flex-col items-center gap-3 py-4 text-center">
+                <span className="flex size-12 items-center justify-center rounded-full bg-fresh/15 text-fresh-deep">
+                  <Icon name="check" size={22} />
+                </span>
+                <h3 className="font-display text-2xl font-semibold text-ink">Got it — thank you.</h3>
+                <p className="max-w-sm text-ink-soft">
+                  A team member will reach out shortly to confirm details. Need it faster? Call{' '}
+                  {company.phone} any time.
+                </p>
               </div>
-            </div>
+            ) : (
+              <>
+                {selected.emergency && (
+                  <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-alert/15 px-3 py-1.5 text-xs font-semibold tracking-wide text-alert-deep uppercase">
+                    <Icon name="alert" size={14} />
+                    Emergency service
+                  </span>
+                )}
+                <h3
+                  className={`font-display text-2xl font-semibold sm:text-3xl ${
+                    selected.emergency ? 'text-alert-deep' : 'text-ink'
+                  }`}
+                >
+                  {quickHelp.revealTitle}
+                </h3>
+
+                <form ref={formRef} noValidate onSubmit={onSubmit} className="mt-7 grid gap-4 sm:grid-cols-3">
+                  <Field
+                    label="Name"
+                    data-field="name"
+                    value={values.name}
+                    onChange={set('name')}
+                    error={errors.name}
+                  />
+                  <Field
+                    label="Phone"
+                    type="tel"
+                    inputMode="tel"
+                    data-field="phone"
+                    value={values.phone}
+                    onChange={set('phone')}
+                    error={errors.phone}
+                  />
+                  <Field
+                    label="ZIP"
+                    inputMode="numeric"
+                    data-field="zip"
+                    value={values.zip}
+                    onChange={set('zip')}
+                    error={errors.zip}
+                  />
+
+                  <div className="sm:col-span-3">
+                    <Button
+                      type="submit"
+                      variant={selected.emergency ? 'danger' : 'primary'}
+                      size="lg"
+                      className="w-full sm:w-auto"
+                      disabled={status === 'submitting'}
+                      iconRight={status === 'submitting' ? undefined : 'arrowRight'}
+                    >
+                      {status === 'submitting' ? 'Sending…' : quickHelp.cta}
+                    </Button>
+                  </div>
+                </form>
+
+                {selected.emergency && (
+                  <p className="mt-4 text-sm text-ink-faint">
+                    Need someone now?{' '}
+                    <a href={company.phoneHref} className="font-semibold text-alert-deep">
+                      Call {company.phone}
+                    </a>{' '}
+                    instead of waiting on a callback.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
         )}
       </div>
     </Section>

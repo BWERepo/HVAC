@@ -68,9 +68,10 @@ export const nav = [
 ]
 
 export const hero = {
-  headline: ['YOUR COMFORT.', 'OUR PRIORITY.'],
-  sub: 'Professional Heating, Cooling & Indoor Air Quality Services',
+  headline: ['COMFORT RESTORED.', 'FAST.'],
+  sub: 'Expert heating & cooling service from technicians you can trust.',
   emergencyLine: '24/7 Emergency HVAC Service',
+  proofLine: ['Same-Day Service', 'Upfront Pricing', 'Licensed & Insured'],
   serviceLine: ['Heating', 'Cooling', 'Indoor Air Quality', '24/7 Emergency Service'],
   targetTemp: 72,
   tempCaption: 'Feels pretty good, doesn’t it?',
@@ -138,76 +139,36 @@ export const services = [
 ]
 
 /**
- * Diagnostic selector. `emergency: true` swaps the response into the urgent
- * treatment and points at the 24/7 line instead of the scheduling form.
+ * The site's signature moment: three big, unmissable choices right under the
+ * hero. Selecting one reveals a 3-field lead-capture form in place — the
+ * fastest possible path from "I have a problem" to "we have your number."
+ * `emergency: true` swaps the reveal copy to lean into urgency.
  */
-export const problems = [
-  {
-    id: 'too-hot',
-    label: 'It’s too hot',
-    icon: 'sun',
-    verdict: 'Sounds like your cooling system needs some attention.',
-    detail:
-      'Poor cooling can be caused by airflow problems, refrigerant issues, thermostat problems, equipment failure or several other conditions. A technician can quickly diagnose the cause.',
-  },
-  {
-    id: 'too-cold',
-    label: 'It’s too cold',
-    icon: 'snow',
-    verdict: 'Your heating system probably isn’t keeping up.',
-    detail:
-      'Weak heat often traces back to ignition or burner faults, a struggling heat pump, restricted airflow or thermostat settings. A technician can confirm which it is before anything gets replaced.',
-  },
-  {
-    id: 'weak-airflow',
-    label: 'Airflow is weak',
-    icon: 'wind',
-    verdict: 'Something is restricting air on its way to your rooms.',
-    detail:
-      'Clogged filters, closed or crushed ducts, a failing blower motor or an undersized return can all starve airflow. This one is usually straightforward to track down.',
-  },
-  {
-    id: 'leaking',
-    label: 'Something is leaking',
-    icon: 'drop',
-    verdict: 'Worth looking at soon — water and refrigerant both cause damage.',
-    detail:
-      'Condensate drains back up, pans crack, and refrigerant lines develop leaks. Turning the system off and scheduling promptly limits the damage.',
-  },
-  {
-    id: 'strange-noise',
-    label: 'My system sounds strange',
-    icon: 'wave',
-    verdict: 'New noises usually mean a part is working harder than it should.',
-    detail:
-      'Grinding, screeching, rattling and short cycling each point somewhere different — motors, bearings, loose components or controls. Catching it early is normally the cheaper repair.',
-  },
-  {
-    id: 'high-bill',
-    label: 'My energy bill is too high',
-    icon: 'bolt',
-    verdict: 'Your system may be working much harder than it needs to.',
-    detail:
-      'Aging equipment, duct leakage, poor airflow and low refrigerant all raise runtime. A performance check will show where the energy is actually going.',
-  },
-  {
-    id: 'air-quality',
-    label: 'My air quality isn’t great',
-    icon: 'leaf',
-    verdict: 'Comfort is about the air itself, not just the temperature.',
-    detail:
-      'Dust, dryness, humidity swings and lingering odours are usually filtration, ventilation or humidity-control problems — all of which are fixable.',
-  },
-  {
-    id: 'stopped',
-    label: 'My system stopped working',
-    icon: 'alert',
-    emergency: true,
-    verdict: 'Let’s get someone out to you.',
-    detail:
-      'A complete shutdown is what our emergency line is for. If your home is getting genuinely uncomfortable or unsafe, call now rather than waiting for a scheduled slot.',
-  },
-]
+export const quickHelp = {
+  eyebrow: 'Quick help',
+  title: 'What’s Wrong With Your System?',
+  sub: 'Tell us what’s going on and we’ll take it from there.',
+  options: [
+    {
+      id: 'no-cooling',
+      label: 'AC Not Cooling',
+      icon: 'sun',
+    },
+    {
+      id: 'no-heat',
+      label: 'Heat Not Working',
+      icon: 'snow',
+      emergency: true,
+    },
+    {
+      id: 'other',
+      label: 'Other HVAC Problem',
+      icon: 'wrench',
+    },
+  ],
+  revealTitle: 'We can help. Tell us where to reach you.',
+  cta: 'Request Service',
+}
 
 /**
  * Full service catalog — the 3 `services` pillars above stay as the
