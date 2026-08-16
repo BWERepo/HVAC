@@ -1,6 +1,23 @@
 import { socials } from '../data/site'
 import Icon from './ui/Icon'
 
+// Approximate brand colors, applied to the icon at rest via `currentColor` —
+// a recognizable nod to each platform's identity, not an exact brand asset.
+const brandColors = {
+  facebook: '#1877F2',
+  instagram: '#E1306C',
+  google: '#4285F4',
+  yelp: '#D32323',
+  nextdoor: '#8DDE6B',
+  youtube: '#FF0000',
+  tiktok: '#25F4EE',
+  x: '#111111',
+  linkedin: '#0A66C2',
+  pinterest: '#E60023',
+  whatsapp: '#25D366',
+  sms: '#0EA5E9',
+}
+
 /**
  * A prominent vertical strip of social/contact icons pinned to the right
  * edge of the viewport. Desktop-only (`lg:flex`) — on mobile, TopBar already
@@ -22,7 +39,8 @@ export default function SocialRail() {
                 href={social.href}
                 aria-label={isContactLink ? social.label : `${social.label} (placeholder link)`}
                 title={social.label}
-                className="flex size-9 items-center justify-center rounded-xl text-ink-soft transition-all duration-200 hover:scale-110 hover:bg-sun/15 hover:text-sun-deep"
+                style={{ color: brandColors[social.id] }}
+                className="flex size-9 items-center justify-center rounded-xl opacity-80 transition-all duration-200 hover:scale-110 hover:bg-current/10 hover:opacity-100"
               >
                 <Icon name={social.id} size={17} />
               </a>
