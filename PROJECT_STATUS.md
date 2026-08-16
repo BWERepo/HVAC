@@ -6,10 +6,10 @@ Last updated: 2026-08-16 (end of session).
 showcase** — real stock photography, a rebuilt 4-step conversion flow, a new type
 system, and a full page-length trim, driven by a long back-and-forth design review.
 Live at **<https://hvac.businesswebexpress.com>**, repo
-**<https://github.com/BWERepo/HVAC>** (`main`), currently **v1.0.0** (Version ID
-`8c110b26-4001-4fc4-b3b0-47e2af719441`) — the version number was bumped straight to
-1.0.0 to mark this session's redesign as the milestone release, skipping the usual
-patch increment. 17 commits landed this session (starting from `bb4d162`), each one
+**<https://github.com/BWERepo/HVAC>** (`main`) at commit `45afde6`, currently **v1.0.0**
+(Version ID `8c110b26-4001-4fc4-b3b0-47e2af719441`) — the version number was bumped
+straight to 1.0.0 to mark this session's redesign as the milestone release, skipping the
+usual patch increment. 16 commits landed this session (`bb4d162` → `45afde6`), each one
 built → deployed → committed → pushed in sequence per the user's standing "always
 deploy after changes" preference — the live site should always match `main`.
 
@@ -312,8 +312,9 @@ the custom domain `hvac.businesswebexpress.com`.
 
 ## Deploy history (most recent first)
 
-- (pending commit) — v1.0.0, deployed, Version ID `8c110b26-4001-4fc4-b3b0-47e2af719441` ← **live**
-- (pending commit) — v0.6.1, deployed, Version ID `9748917d-a1f3-4196-82ba-3e24bf922367`
+- `45afde6` — v1.0.0 / v0.6.1 (both bumps landed in this one commit), deployed twice,
+  Version IDs `8c110b26-4001-4fc4-b3b0-47e2af719441` (v1.0.0, live) and
+  `9748917d-a1f3-4196-82ba-3e24bf922367` (v0.6.1, superseded) ← **live**
 - `f4c5e7d` — v0.6.0, deployed, Version ID `370aa8a2-bfdd-4428-a24e-8809bd6808fd`
 - `0ec5892` — v0.5.2, deployed, Version ID `61f6a7b7-a7cd-4afc-bd16-b9721c98b7f4`
   (v0.5.1 deployed under Version ID `c17bf6c2-1a0e-471b-be6d-0495db14f0e5`, not
