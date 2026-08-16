@@ -9,7 +9,7 @@ import Section, { SectionHeading } from './ui/Section'
  * `photo` field to the team data and rendering it here — nothing else changes.
  */
 function Portrait({ initials, index }) {
-  const tints = ['var(--color-cool)', 'var(--color-fresh)', 'var(--color-sky)', 'var(--color-warm)']
+  const tints = ['var(--color-cool)', 'var(--color-fresh)', 'var(--color-sun)', 'var(--color-warm)']
   const tint = tints[index % tints.length]
 
   return (
@@ -52,12 +52,12 @@ export default function TeamSection() {
       <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {team.map((person, i) => (
           <Reveal key={person.name} delay={i * 90}>
-            <article className="group h-full rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:bg-white/[0.06]">
+            <article className="group h-full rounded-[var(--radius-card)] border border-line bg-sunk/70 p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-line-strong hover:bg-sunk">
               <Portrait initials={person.initials} index={i} />
 
               <div className="px-2 pt-5 pb-3">
                 <h3 className="font-display text-lg font-semibold text-ink">{person.name}</h3>
-                <p className="mt-1 text-sm font-medium text-cool">{person.role}</p>
+                <p className="mt-1 text-sm font-medium text-cool-deep">{person.role}</p>
 
                 <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-faint">
                   <Icon name="clock" size={13} />

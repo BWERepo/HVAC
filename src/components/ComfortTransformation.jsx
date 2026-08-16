@@ -66,7 +66,7 @@ export default function ComfortTransformation() {
           onPointerMove={onDrag}
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-lift select-none"
+          className="relative overflow-hidden rounded-[2rem] border border-line shadow-lift select-none"
         >
           {/* Before */}
           <Scene
@@ -85,10 +85,10 @@ export default function ComfortTransformation() {
           </div>
 
           {/* Side labels */}
-          <span className="absolute top-4 left-4 rounded-full bg-void/70 px-3 py-1.5 text-xs font-semibold tracking-wide text-ink-soft uppercase backdrop-blur-sm">
+          <span className="absolute top-4 left-4 rounded-full bg-surface/85 px-3 py-1.5 text-xs font-semibold tracking-wide text-ink-soft uppercase backdrop-blur-sm">
             {transformation.before.label}
           </span>
-          <span className="absolute top-4 right-4 rounded-full bg-cool/20 px-3 py-1.5 text-xs font-semibold tracking-wide text-cool uppercase backdrop-blur-sm">
+          <span className="absolute top-4 right-4 rounded-full bg-cool/20 px-3 py-1.5 text-xs font-semibold tracking-wide text-cool-deep uppercase backdrop-blur-sm">
             {transformation.after.label}
           </span>
 
@@ -106,7 +106,7 @@ export default function ComfortTransformation() {
             aria-valuenow={Math.round(pos)}
             aria-valuetext={`${Math.round(pos)}% showing the upgraded system`}
             onKeyDown={onKeyDown}
-            className={`absolute top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 touch-none items-center justify-center rounded-full border-2 border-cool bg-base text-cool shadow-lg ${
+            className={`absolute top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 touch-none items-center justify-center rounded-full border-2 border-cool bg-canvas text-cool-deep shadow-lg ${
               dragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
             style={{ left: `${pos}%` }}
@@ -127,12 +127,12 @@ export default function ComfortTransformation() {
               <div
                 key={side.label}
                 className={`rounded-2xl border p-6 transition-colors ${
-                  isAfter ? 'border-cool/30 bg-cool/[0.06]' : 'border-white/10 bg-white/[0.02]'
+                  isAfter ? 'border-cool/40 bg-cool/8' : 'border-line bg-sunk/60'
                 }`}
               >
                 <h3
                   className={`font-display text-sm font-semibold tracking-[0.16em] uppercase ${
-                    isAfter ? 'text-cool' : 'text-ink-faint'
+                    isAfter ? 'text-cool-deep' : 'text-ink-faint'
                   }`}
                 >
                   {side.label}
@@ -143,7 +143,7 @@ export default function ComfortTransformation() {
                       <Icon
                         name={isAfter ? 'check' : 'minus'}
                         size={17}
-                        className={`mt-0.5 shrink-0 ${isAfter ? 'text-cool' : 'text-ink-faint/60'}`}
+                        className={`mt-0.5 shrink-0 ${isAfter ? 'text-cool-deep' : 'text-ink-faint/60'}`}
                       />
                       <span className={isAfter ? 'text-ink' : 'text-ink-soft'}>{point}</span>
                     </li>

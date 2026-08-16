@@ -18,8 +18,8 @@ export default function Logo({ className = '', compact = false }) {
       >
         <defs>
           <linearGradient id="pc-logo-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--color-cool)" />
-            <stop offset="100%" stopColor="var(--color-sky)" />
+            <stop offset="0%" stopColor="var(--color-sun)" />
+            <stop offset="100%" stopColor="var(--color-cool)" />
           </linearGradient>
         </defs>
         <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" strokeOpacity=".16" strokeWidth="1.5" />

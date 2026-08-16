@@ -20,16 +20,16 @@ export default function Field({
   const Tag = as
 
   const shell =
-    'w-full min-h-[52px] rounded-xl border bg-white/[0.04] px-4 py-3 text-ink placeholder:text-ink-faint/70 ' +
-    'transition-colors duration-200 outline-none focus:border-cool focus:bg-white/[0.07] ' +
-    (error ? 'border-alert/70' : 'border-white/12 hover:border-white/25')
+    'w-full min-h-[52px] rounded-xl border bg-surface px-4 py-3 text-ink placeholder:text-ink-faint/70 ' +
+    'transition-colors duration-200 outline-none focus:border-sun-deep focus:ring-2 focus:ring-sun/25 ' +
+    (error ? 'border-alert-deep' : 'border-line-strong hover:border-ink-faint')
 
   return (
     <div className={className}>
       <label htmlFor={id} className="mb-2 block text-sm font-medium text-ink">
         {label}
         {required && (
-          <span className="ml-1 text-alert" aria-hidden="true">
+          <span className="ml-1 text-alert-deep" aria-hidden="true">
             *
           </span>
         )}
@@ -53,7 +53,7 @@ export default function Field({
       )}
 
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-xs text-alert">
+        <p id={errorId} role="alert" className="mt-1.5 text-xs text-alert-deep">
           {error}
         </p>
       )}
@@ -70,7 +70,7 @@ export function ChoiceGroup({ legend, options, value, onChange, error, name, col
     <fieldset aria-describedby={error ? errorId : undefined}>
       <legend className="mb-2 text-sm font-medium text-ink">
         {legend}
-        <span className="ml-1 text-alert" aria-hidden="true">
+        <span className="ml-1 text-alert-deep" aria-hidden="true">
           *
         </span>
       </legend>
@@ -86,8 +86,8 @@ export function ChoiceGroup({ legend, options, value, onChange, error, name, col
               key={option}
               className={`flex min-h-[48px] cursor-pointer items-center justify-center rounded-xl border px-3 py-2.5 text-center text-sm font-medium transition-all duration-200 ${
                 selected
-                  ? 'border-cool/60 bg-cool/12 text-ink'
-                  : 'border-white/12 bg-white/[0.03] text-ink-soft hover:border-white/30'
+                  ? 'border-cool bg-cool/10 text-ink'
+                  : 'border-line bg-sunk/70 text-ink-soft hover:border-line-strong'
               }`}
             >
               <input
@@ -105,7 +105,7 @@ export function ChoiceGroup({ legend, options, value, onChange, error, name, col
       </div>
 
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-xs text-alert">
+        <p id={errorId} role="alert" className="mt-1.5 text-xs text-alert-deep">
           {error}
         </p>
       )}

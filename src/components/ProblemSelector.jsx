@@ -34,18 +34,18 @@ export default function ProblemSelector({ onSchedule }) {
                 className={`group flex h-full w-full cursor-pointer flex-col items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-300 ${
                   isActive
                     ? problem.emergency
-                      ? 'border-alert/60 bg-alert/10'
-                      : 'border-cool/60 bg-cool/10'
-                    : 'border-white/10 bg-white/[0.03] hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.07]'
+                      ? 'border-alert-deep bg-alert/10'
+                      : 'border-cool bg-cool/10'
+                    : 'border-line bg-sunk/70 hover:-translate-y-1 hover:border-line-strong hover:bg-sunk'
                 }`}
               >
                 <span
                   className={`flex size-11 items-center justify-center rounded-xl transition-colors ${
                     isActive
                       ? problem.emergency
-                        ? 'bg-alert/20 text-alert'
-                        : 'bg-cool/20 text-cool'
-                      : 'bg-white/5 text-ink-soft group-hover:text-cool'
+                        ? 'bg-alert/20 text-alert-deep'
+                        : 'bg-cool/20 text-cool-deep'
+                      : 'bg-sunk/70 text-ink-soft group-hover:text-cool-deep'
                   }`}
                 >
                   <Icon name={problem.icon} size={22} />
@@ -68,20 +68,20 @@ export default function ProblemSelector({ onSchedule }) {
               key={selected.id}
               style={{ animation: 'pc-rise 340ms var(--ease-out-soft) both' }}
               className={`glass overflow-hidden rounded-[var(--radius-card)] border p-8 sm:p-10 ${
-                selected.emergency ? 'border-alert/40' : 'border-cool/25'
+                selected.emergency ? 'border-alert-deep/50' : 'border-cool/40'
               }`}
             >
               <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
                 <div className="flex-1">
                   {selected.emergency && (
-                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-alert/15 px-3 py-1.5 text-xs font-semibold tracking-wide text-alert uppercase">
+                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-alert/15 px-3 py-1.5 text-xs font-semibold tracking-wide text-alert-deep uppercase">
                       <Icon name="alert" size={14} />
                       Emergency service
                     </span>
                   )}
                   <h3
                     className={`font-display text-2xl font-semibold sm:text-3xl ${
-                      selected.emergency ? 'text-alert' : 'text-ink'
+                      selected.emergency ? 'text-alert-deep' : 'text-ink'
                     }`}
                   >
                     {selected.verdict}

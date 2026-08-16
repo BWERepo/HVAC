@@ -2,9 +2,15 @@
 
 /* ==========================================================================
    Precision Comfort — design system
-   Dark, precision-instrument aesthetic: deep navy base, electric cyan accent,
-   restrained amber for heating contexts. Every colour below is a token so a
-   real customer's brand can be dropped in from one place.
+   Bright, warm and optimistic: a sunlit-home palette. Warm-white ground,
+   sunny amber as the brand/primary action, with sky blue, orange and teal
+   carrying cooling / heating / air-quality respectively.
+
+   COLOUR DISCIPLINE — read this before adding a colour:
+   The bright hues (sun, cool, warm, fresh) are for FILLS, icons and large
+   graphics. They do not have enough contrast for text on a light ground.
+   For text, always use the `-deep` variant, which is verified ≥4.5:1
+   against --color-canvas.
    ========================================================================== */
 
 @theme {
@@ -12,29 +18,36 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Fraunces', ui-serif, Georgia, serif;
 
-  /* Surfaces — deepest to most raised */
-  --color-void: #04060c;
-  --color-base: #0a1020;
-  --color-surface: #0f1728;
-  --color-raised: #16203a;
-  --color-hairline: #22304c;
+  /* Surfaces — page ground upward */
+  --color-canvas: #fdfbf7; /* warm white page */
+  --color-surface: #ffffff; /* cards, panels */
+  --color-sunk: #f4efe4; /* tinted recessed blocks */
+  --color-sunk-deep: #ece5d6;
+  --color-line: #e7e0d3; /* hairlines */
+  --color-line-strong: #d3c9b6;
 
-  /* Text — all verified ≥4.5:1 against --color-base */
-  --color-ink: #e9eff9;
-  --color-ink-soft: #9fb0c9;
-  --color-ink-faint: #7a8ca8;
+  /* Text — all verified ≥4.5:1 on --color-canvas */
+  --color-ink: #1b2430; /* ~15:1  primary */
+  --color-ink-soft: #55606e; /* ~6.0:1 secondary */
+  --color-ink-faint: #656f7d; /* ~4.9:1 tertiary */
 
-  /* Accents */
-  --color-cool: #22d3ee;
-  --color-cool-deep: #0891b2;
-  --color-sky: #38bdf8;
-  --color-warm: #fba94c;
-  --color-warm-deep: #e0722f;
-  --color-fresh: #5eead4;
-  --color-alert: #fb7185;
+  /* Bright hues — FILLS AND GRAPHICS ONLY, never text on light */
+  --color-sun: #f59e0b; /* brand / primary action */
+  --color-cool: #0ea5e9; /* cooling */
+  --color-warm: #ea580c; /* heating */
+  --color-fresh: #14b8a6; /* indoor air quality */
+  --color-alert: #f43f5e; /* emergency */
 
-  /* Business Web Express brand — matches the real BWE app's tokens so the
-     closing owner-facing section reads as a different, genuine brand. */
+  /* Text-safe counterparts */
+  --color-sun-deep: #b45309; /* 4.9:1 */
+  --color-cool-deep: #0369a1; /* 5.7:1 */
+  --color-warm-deep: #c2410c; /* 5.0:1 */
+  --color-fresh-deep: #0f766e; /* 5.2:1 */
+  --color-alert-deep: #e11d48; /* 4.6:1 */
+
+  /* Business Web Express brand — matches the real BWE app's tokens. The
+     closing section runs these INVERTED (dark ink ground, cream text) so the
+     brand switch still lands as a hard visual break now the site is light. */
   --color-bwe-cream: oklch(0.975 0.012 85);
   --color-bwe-cream-deep: oklch(0.945 0.02 82);
   --color-bwe-ink: oklch(0.19 0.02 55);
@@ -46,8 +59,10 @@
   --radius-card: 1.25rem;
   --radius-pill: 999px;
 
-  --shadow-lift: 0 30px 80px -40px rgb(0 0 0 / 0.9);
-  --shadow-glow: 0 0 60px -12px color-mix(in oklab, var(--color-cool) 45%, transparent);
+  /* Soft, neutral-warm elevation — heavy black shadows read as grime on a
+     light ground. */
+  --shadow-soft: 0 1px 2px rgb(27 36 48 / 0.05), 0 10px 28px -14px rgb(27 36 48 / 0.14);
+  --shadow-lift: 0 24px 60px -30px rgb(27 36 48 / 0.28);
 
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-soft: cubic-bezier(0.7, 0, 0.84, 0);
@@ -55,7 +70,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-hairline);
+    border-color: var(--color-line);
   }
 
   html {
@@ -66,7 +81,7 @@
   }
 
   body {
-    background-color: var(--color-base);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -93,7 +108,7 @@
 
   /* A single, consistent focus treatment everywhere — never removed. */
   :focus-visible {
-    outline: 2px solid var(--color-cool);
+    outline: 2px solid var(--color-sun-deep);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -105,7 +120,7 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-cool) 30%, transparent);
+    background: color-mix(in oklab, var(--color-sun) 34%, transparent);
     color: var(--color-ink);
   }
 
@@ -129,19 +144,16 @@
     }
   }
 
-  /* Frosted panel used for thermostat, wizard, cards.
+  /* Raised panel used for thermostat, wizard, forms and cards.
      The blur comes from Tailwind's own utilities via @apply rather than a raw
      backdrop-filter declaration: the build's CSS minifier rewrote the raw
      property to the -webkit- prefixed form only, which left the standard
      property unset and the blur not rendering. */
   .glass {
     @apply backdrop-blur-xl backdrop-saturate-150;
-    background: linear-gradient(
-      160deg,
-      color-mix(in oklab, var(--color-raised) 78%, transparent),
-      color-mix(in oklab, var(--color-surface) 82%, transparent)
-    );
-    border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+    background: color-mix(in oklab, var(--color-surface) 86%, transparent);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
   }
 
   /* Small uppercase section label */
@@ -151,7 +163,7 @@
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-cool);
+    color: var(--color-sun-deep);
   }
 }
 

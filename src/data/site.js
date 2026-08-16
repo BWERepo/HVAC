@@ -36,6 +36,24 @@ export const company = {
   hours: 'Emergency service available 24 hours a day, 7 days a week',
 }
 
+/**
+ * PLACEHOLDER — every href below points back to the top of this page. A real
+ * customer's profile URLs drop straight in here; delete any platform the
+ * business does not actually use rather than linking somewhere dead.
+ */
+export const socials = [
+  { id: 'facebook', label: 'Facebook', href: '#top' },
+  { id: 'instagram', label: 'Instagram', href: '#top' },
+  { id: 'google', label: 'Google Business Profile', href: '#top' },
+  { id: 'yelp', label: 'Yelp', href: '#top' },
+  { id: 'nextdoor', label: 'Nextdoor', href: '#top' },
+  { id: 'youtube', label: 'YouTube', href: '#top' },
+  { id: 'tiktok', label: 'TikTok', href: '#top' },
+  { id: 'x', label: 'X', href: '#top' },
+  { id: 'linkedin', label: 'LinkedIn', href: '#top' },
+  { id: 'pinterest', label: 'Pinterest', href: '#top' },
+]
+
 export const nav = [
   { label: 'Cooling', href: '#cooling' },
   { label: 'Heating', href: '#heating' },

@@ -18,9 +18,9 @@ export default function EmergencyCTA() {
       />
 
       <div className="u-container">
-        <div className="relative overflow-hidden rounded-[2rem] border border-alert/25 bg-linear-to-br from-[#1a0f18] to-base p-8 text-center sm:p-14">
+        <div className="relative overflow-hidden rounded-[2rem] border border-alert-deep/35 bg-linear-to-br from-[#FFF1F3] to-surface p-8 text-center sm:p-14">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-alert/30 bg-alert/10 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-alert uppercase">
+            <span className="inline-flex items-center gap-2 rounded-full border border-alert-deep/40 bg-alert/10 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-alert-deep uppercase">
               <span className="relative flex size-2">
                 <span
                   className="absolute inline-flex size-full rounded-full bg-alert"
@@ -44,7 +44,7 @@ export default function EmergencyCTA() {
             {/* Tapping the number opens the dialer on mobile. */}
             <a
               href={company.phoneHref}
-              className="group inline-flex min-h-[64px] cursor-pointer items-center gap-4 rounded-full bg-alert px-8 py-4 font-display text-lg font-bold text-[#2b0710] shadow-[0_14px_50px_-12px_var(--color-alert)] transition-all duration-200 hover:bg-[#ff8fa0] active:scale-[0.97] sm:text-xl"
+              className="group inline-flex min-h-[64px] cursor-pointer items-center gap-4 rounded-full bg-alert-deep px-8 py-4 font-display text-lg font-bold text-white shadow-[0_14px_40px_-12px_var(--color-alert)] transition-all duration-200 hover:bg-[#be123c] active:scale-[0.97] sm:text-xl"
             >
               <Icon name="phone" size={24} className="shrink-0" strokeWidth={1.9} />
               <span className="tnum">Call {company.phone}</span>

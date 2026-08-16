@@ -121,7 +121,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
       <div
         onClick={onClose}
         aria-hidden="true"
-        className={`absolute inset-0 bg-void/75 backdrop-blur-sm transition-opacity duration-250 ease-out ${
+        className={`absolute inset-0 bg-ink/45 backdrop-blur-sm transition-opacity duration-250 ease-out ${
           visible ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -132,14 +132,14 @@ export default function ScheduleBottomSheet({ open, onClose }) {
         aria-modal="true"
         aria-labelledby="schedule-title"
         tabIndex={-1}
-        className={`relative max-h-[92dvh] w-full overflow-y-auto rounded-t-[1.75rem] border border-white/12 bg-surface shadow-lift outline-none transition-all duration-300 ease-out sm:max-w-lg sm:rounded-[1.75rem] ${
+        className={`relative max-h-[92dvh] w-full overflow-y-auto rounded-t-[1.75rem] border border-line bg-surface shadow-lift outline-none transition-all duration-300 ease-out sm:max-w-lg sm:rounded-[1.75rem] ${
           visible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 sm:translate-y-4'
         }`}
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         {/* Grab handle — the affordance that says "this sheet moves". */}
         <div className="flex justify-center pt-3 sm:hidden">
-          <span aria-hidden="true" className="h-1.5 w-11 rounded-full bg-white/20" />
+          <span aria-hidden="true" className="h-1.5 w-11 rounded-full bg-line-strong" />
         </div>
 
         <div className="flex items-start justify-between gap-4 px-6 pt-5 sm:pt-7">
@@ -155,7 +155,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
             type="button"
             onClick={status === 'success' ? closeAndReset : onClose}
             aria-label="Close scheduling panel"
-            className="-mt-1 flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-white/10 hover:text-ink"
+            className="-mt-1 flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-sunk hover:text-ink"
           >
             <Icon name="close" size={21} />
           </button>
@@ -168,7 +168,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
               role="status"
               style={{ animation: 'pc-pop 380ms var(--ease-out-soft) both' }}
             >
-              <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-fresh/15 text-fresh">
+              <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-fresh/15 text-fresh-deep">
                 <Icon name="check" size={32} strokeWidth={2} />
               </span>
               <p className="mt-6 text-lg text-ink">
@@ -176,7 +176,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
                 <span className="font-semibold">{values.timing.toLowerCase()}</span> visit for{' '}
                 <span className="font-semibold">{values.need.toLowerCase()}</span> shortly.
               </p>
-              <p className="mx-auto mt-5 max-w-sm rounded-xl border border-white/10 bg-white/[0.03] p-4 text-xs leading-relaxed text-ink-faint">
+              <p className="mx-auto mt-5 max-w-sm rounded-xl border border-line bg-sunk/70 p-4 text-xs leading-relaxed text-ink-faint">
                 This is a demonstration. Nothing was submitted, sent or stored.
               </p>
               <Button variant="outline" className="mt-6 w-full" onClick={closeAndReset}>
@@ -199,8 +199,8 @@ export default function ScheduleBottomSheet({ open, onClose }) {
                       onClick={() => setValues((v) => ({ ...v, need: option }))}
                       className={`min-h-[48px] cursor-pointer rounded-xl border px-3 py-3 text-sm font-medium transition-all duration-200 ${
                         values.need === option
-                          ? 'border-cool/60 bg-cool/12 text-ink'
-                          : 'border-white/12 bg-white/[0.03] text-ink-soft hover:border-white/30'
+                          ? 'border-cool bg-cool/10 text-ink'
+                          : 'border-line bg-sunk/70 text-ink-soft hover:border-line-strong'
                       }`}
                     >
                       {option}
@@ -224,8 +224,8 @@ export default function ScheduleBottomSheet({ open, onClose }) {
                         onClick={() => setValues((v) => ({ ...v, timing: option }))}
                         className={`min-h-[48px] cursor-pointer rounded-xl border px-2 py-3 text-[0.8rem] font-medium transition-all duration-200 ${
                           values.timing === option
-                            ? 'border-cool/60 bg-cool/12 text-ink'
-                            : 'border-white/12 bg-white/[0.03] text-ink-soft hover:border-white/30'
+                            ? 'border-cool bg-cool/10 text-ink'
+                            : 'border-line bg-sunk/70 text-ink-soft hover:border-line-strong'
                         }`}
                       >
                         {option}
@@ -298,7 +298,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
 
                     <p className="text-center text-xs text-ink-faint">
                       Demonstration form — nothing is transmitted. Or call{' '}
-                      <a href={company.phoneHref} className="text-cool hover:underline">
+                      <a href={company.phoneHref} className="text-cool-deep hover:underline">
                         {company.phone}
                       </a>
                       .

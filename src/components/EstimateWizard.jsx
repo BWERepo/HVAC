@@ -69,7 +69,7 @@ export default function EstimateWizard() {
               )}
             </div>
             <div
-              className="h-1.5 overflow-hidden rounded-full bg-white/10"
+              className="h-1.5 overflow-hidden rounded-full bg-sunk-deep"
               role="progressbar"
               aria-valuemin={0}
               aria-valuemax={total}
@@ -100,15 +100,15 @@ export default function EstimateWizard() {
                         onClick={() => choose(option)}
                         className={`group flex min-h-[56px] cursor-pointer items-center justify-between gap-3 rounded-xl border px-5 py-4 text-left transition-all duration-200 ${
                           isSelected
-                            ? 'border-cool/60 bg-cool/10'
-                            : 'border-white/12 bg-white/[0.03] hover:border-cool/40 hover:bg-white/[0.07]'
+                            ? 'border-cool bg-cool/10'
+                            : 'border-line bg-sunk/70 hover:border-cool hover:bg-sunk'
                         }`}
                       >
                         <span className="font-medium text-ink">{option}</span>
                         <Icon
                           name="arrowRight"
                           size={17}
-                          className="text-ink-faint transition-all group-hover:translate-x-0.5 group-hover:text-cool"
+                          className="text-ink-faint transition-all group-hover:translate-x-0.5 group-hover:text-cool-deep"
                         />
                       </button>
                     )
@@ -118,7 +118,7 @@ export default function EstimateWizard() {
             ) : (
               <div key="result" style={{ animation: stepAnimation }}>
                 <div className="flex items-center gap-3">
-                  <span className="flex size-11 items-center justify-center rounded-full bg-fresh/15 text-fresh">
+                  <span className="flex size-11 items-center justify-center rounded-full bg-fresh/15 text-fresh-deep">
                     <Icon name="check" size={22} />
                   </span>
                   <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
@@ -132,7 +132,7 @@ export default function EstimateWizard() {
                 </p>
 
                 {/* Answer recap — shows the owner how the lead arrives qualified. */}
-                <dl className="mt-8 grid gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-2">
+                <dl className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-sunk-deep sm:grid-cols-2">
                   {wizard.steps.map((s) => (
                     <div key={s.id} className="bg-surface px-5 py-4">
                       <dt className="text-xs tracking-wide text-ink-faint uppercase">
@@ -143,7 +143,7 @@ export default function EstimateWizard() {
                   ))}
                 </dl>
 
-                <p className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-ink-faint">
+                <p className="mt-6 rounded-xl border border-line bg-sunk/70 p-4 text-sm leading-relaxed text-ink-faint">
                   This is a general direction, not a quote. Accurate pricing needs a load
                   calculation and a look at your existing equipment and ductwork — which is
                   exactly what the estimate visit is for.

@@ -6,24 +6,25 @@ const base =
   'transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out ' +
   'active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100'
 
+/**
+ * On a light ground the bright hues do not carry white text, so every filled
+ * variant except `primary` uses its text-safe `-deep` shade. Sunny amber is
+ * the exception and the point: it is light enough to take near-black text at
+ * ~7.7:1, which is what makes it read as cheerful rather than heavy.
+ */
 const variants = {
-  // One primary treatment, used sparingly — the electric cyan is the site's
-  // single loudest colour and it always means "this is the action".
   primary:
-    'bg-cool text-[#04121a] shadow-[0_10px_40px_-12px_var(--color-cool)] ' +
-    'hover:bg-[#4ce0f5] hover:shadow-[0_14px_50px_-10px_var(--color-cool)]',
+    'bg-sun text-[#2a1b04] shadow-[0_10px_30px_-12px_var(--color-sun)] ' +
+    'hover:bg-[#fbb534] hover:shadow-[0_14px_38px_-10px_var(--color-sun)]',
+  cool:
+    'bg-cool-deep text-white shadow-[0_10px_30px_-12px_var(--color-cool)] hover:bg-[#0284c7]',
   warm:
-    'bg-warm text-[#231204] shadow-[0_10px_40px_-12px_var(--color-warm)] ' +
-    'hover:bg-[#ffbe6d] hover:shadow-[0_14px_50px_-10px_var(--color-warm)]',
+    'bg-warm-deep text-white shadow-[0_10px_30px_-12px_var(--color-warm)] hover:bg-[#dc4a10]',
   fresh:
-    'bg-fresh text-[#04211c] shadow-[0_10px_40px_-12px_var(--color-fresh)] ' +
-    'hover:bg-[#8bf3e2] hover:shadow-[0_14px_50px_-10px_var(--color-fresh)]',
-  outline:
-    'border border-white/20 bg-white/[0.04] text-ink backdrop-blur-md ' +
-    'hover:bg-white/[0.10] hover:border-white/35',
-  ghost: 'text-ink-soft hover:text-ink hover:bg-white/[0.06]',
-  danger:
-    'bg-alert text-[#2b0710] shadow-[0_10px_40px_-12px_var(--color-alert)] hover:bg-[#ff8fa0]',
+    'bg-fresh-deep text-white shadow-[0_10px_30px_-12px_var(--color-fresh)] hover:bg-[#0d8b80]',
+  outline: 'border border-line-strong bg-surface text-ink hover:bg-sunk',
+  ghost: 'text-ink-soft hover:text-ink hover:bg-sunk',
+  danger: 'bg-alert-deep text-white shadow-[0_10px_30px_-12px_var(--color-alert)] hover:bg-[#be123c]',
 }
 
 const sizes = {
@@ -50,7 +51,7 @@ export default function Button({
       {/* Hover sheen — pure transform, and hidden from the a11y tree. */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[220%]"
+        className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-linear-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[220%]"
       />
       {icon ? <Icon name={icon} size={18} className="relative shrink-0" /> : null}
       <span className="relative">{children}</span>

@@ -45,12 +45,12 @@ function Airflow() {
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
-      <g fill="none" stroke="var(--color-cool)" strokeWidth="1.25" strokeLinecap="round">
+      <g fill="none" stroke="var(--color-cool)" strokeWidth="1.6" strokeLinecap="round">
         {[
-          { d: 'M-50 210 q220-70 440 0 t440 0 t420 0', delay: 0, o: 0.5 },
-          { d: 'M-50 330 q240-80 480 0 t480 0 t380 0', delay: 2.6, o: 0.35 },
-          { d: 'M-50 470 q200-64 400 0 t400 0 t460 0', delay: 5.1, o: 0.28 },
-          { d: 'M-50 610 q260-70 520 0 t520 0 t300 0', delay: 7.4, o: 0.2 },
+          { d: 'M-50 210 q220-70 440 0 t440 0 t420 0', delay: 0, o: 0.6 },
+          { d: 'M-50 330 q240-80 480 0 t480 0 t380 0', delay: 2.6, o: 0.45 },
+          { d: 'M-50 470 q200-64 400 0 t400 0 t460 0', delay: 5.1, o: 0.38 },
+          { d: 'M-50 610 q260-70 520 0 t520 0 t300 0', delay: 7.4, o: 0.3 },
         ].map((line) => (
           <path
             key={line.d}
@@ -90,13 +90,13 @@ function ThermostatReadout() {
         className="absolute -inset-px rounded-[2rem] opacity-60"
         style={{
           background:
-            'radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--color-cool) 22%, transparent), transparent 60%)',
+            'radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--color-sun) 26%, transparent), transparent 62%)',
         }}
       />
 
       <div className="relative flex items-center justify-between">
         <span className="eyebrow">Living Room</span>
-        <span className="flex items-center gap-1.5 text-[0.7rem] font-medium text-fresh">
+        <span className="flex items-center gap-1.5 text-[0.7rem] font-medium text-fresh-deep">
           <span className="relative flex size-1.5">
             <span
               className="absolute inline-flex size-full rounded-full bg-fresh"
@@ -112,15 +112,15 @@ function ThermostatReadout() {
         <span className="tnum font-display text-[7rem] leading-[0.85] font-light tracking-tighter text-ink">
           {temp}
         </span>
-        <span className="mt-3 font-display text-4xl font-light text-cool">°</span>
+        <span className="mt-3 font-display text-4xl font-light text-cool-deep">°</span>
       </div>
 
       <p className="relative mt-4 text-center text-sm text-ink-soft">{hero.tempCaption}</p>
 
       {/* Dial track — visual only; the real interactive control is further down. */}
-      <div className="relative mt-7 h-1.5 overflow-hidden rounded-full bg-white/10">
+      <div className="relative mt-7 h-1.5 overflow-hidden rounded-full bg-sunk-deep">
         <div
-          className="h-full rounded-full bg-linear-to-r from-cool-deep to-cool transition-[width] duration-1000 ease-out"
+          className="h-full rounded-full bg-linear-to-r from-cool to-fresh transition-[width] duration-1000 ease-out"
           style={{ width: armed ? '58%' : '30%' }}
         />
       </div>
@@ -150,11 +150,11 @@ export default function Hero() {
         {/* Legibility scrim — the headline must never fight the artwork. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-base/85 via-base/70 to-base"
+          className="absolute inset-0 bg-linear-to-b from-canvas/60 via-canvas/45 to-canvas"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-r from-base via-base/60 to-transparent"
+          className="absolute inset-0 bg-linear-to-r from-canvas/95 via-canvas/70 to-transparent"
         />
 
         <Airflow />
@@ -167,7 +167,7 @@ export default function Hero() {
           }`}
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklab, var(--color-cool) 26%, transparent), transparent 68%)',
+              'radial-gradient(circle, color-mix(in oklab, var(--color-sun) 34%, transparent), transparent 70%)',
           }}
         />
       </div>
@@ -193,7 +193,7 @@ export default function Hero() {
                     animation: reduced
                       ? undefined
                       : `pc-rise 900ms var(--ease-out-soft) ${120 + i * 130}ms both`,
-                    color: i === 2 ? 'var(--color-cool)' : undefined,
+                    color: i === 2 ? 'var(--color-sun-deep)' : undefined,
                   }}
                 >
                   {line}
@@ -238,7 +238,7 @@ export default function Hero() {
             >
               {hero.serviceLine.map((item, i) => (
                 <li key={item} className="flex items-center gap-3">
-                  {i > 0 && <span aria-hidden="true" className="text-cool/40">•</span>}
+                  {i > 0 && <span aria-hidden="true" className="text-sun-deep/50">•</span>}
                   <span>{item}</span>
                 </li>
               ))}
@@ -262,7 +262,7 @@ export default function Hero() {
         className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 rounded-full px-4 py-2 text-[0.7rem] tracking-[0.18em] text-ink-faint uppercase transition-colors hover:text-ink sm:flex"
       >
         Explore
-        <Icon name="chevronDown" size={18} className="text-cool" />
+        <Icon name="chevronDown" size={18} className="text-cool-deep" />
       </a>
     </section>
   )

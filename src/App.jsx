@@ -3,7 +3,6 @@ import { services } from './data/site'
 
 import BusinessWebExpressCTA from './components/BusinessWebExpressCTA'
 import ComfortTransformation from './components/ComfortTransformation'
-import DemoBanner from './components/DemoBanner'
 import EfficiencySection from './components/EfficiencySection'
 import EmergencyCTA from './components/EmergencyCTA'
 import EstimateWizard from './components/EstimateWizard'
@@ -19,6 +18,7 @@ import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
 import ServiceExperience from './components/ServiceExperience'
 import TeamSection from './components/TeamSection'
+import TopBar from './components/TopBar'
 import Testimonials from './components/Testimonials'
 import TrustStats from './components/TrustStats'
 
@@ -35,12 +35,12 @@ export default function App() {
     <div className="pb-[76px] lg:pb-0">
       <a
         href="#main"
-        className="sr-only rounded-full bg-cool px-5 py-3 font-semibold text-[#04121a] focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
+        className="sr-only rounded-full bg-sun px-5 py-3 font-semibold text-[#2a1b04] focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
       >
         Skip to main content
       </a>
 
-      <DemoBanner />
+      <TopBar />
       <Header onSchedule={openSheet} />
 
       <main id="main">

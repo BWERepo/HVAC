@@ -14,7 +14,7 @@ function climateFor(temp) {
   if (temp >= 74) return { label: 'A Little Warm', accent: 'var(--color-warm)', tone: 'warm' }
   if (temp >= 71) return { label: 'Perfect', accent: 'var(--color-fresh)', tone: 'perfect' }
   if (temp >= 69) return { label: 'Comfortably Cool', accent: 'var(--color-cool)', tone: 'cool' }
-  return { label: 'Getting Chilly', accent: 'var(--color-sky)', tone: 'cold' }
+  return { label: 'Getting Chilly', accent: 'var(--color-cool-deep)', tone: 'cold' }
 }
 
 function polar(cx, cy, r, deg) {
@@ -180,7 +180,7 @@ export default function InteractiveThermostat({ onSchedule }) {
                         x2={outer.x}
                         y2={outer.y}
                         stroke={passed ? 'var(--dial)' : 'currentColor'}
-                        className={passed ? '' : 'text-white/15'}
+                        className={passed ? '' : 'text-line-strong'}
                         strokeOpacity={passed ? 0.8 : 1}
                         strokeWidth={i % 5 === 0 ? 2 : 1.25}
                         strokeLinecap="round"
@@ -194,7 +194,7 @@ export default function InteractiveThermostat({ onSchedule }) {
                   d={arcPath(160, 160, 128, START_ANGLE, START_ANGLE + SWEEP)}
                   fill="none"
                   stroke="currentColor"
-                  className="text-white/10"
+                  className="text-line"
                   strokeWidth="10"
                   strokeLinecap="round"
                 />
@@ -214,7 +214,7 @@ export default function InteractiveThermostat({ onSchedule }) {
                     cx={handle.x}
                     cy={handle.y}
                     r="11"
-                    fill="var(--color-base)"
+                    fill="var(--color-canvas)"
                     stroke="var(--dial)"
                     strokeWidth="3.5"
                   />
@@ -249,7 +249,7 @@ export default function InteractiveThermostat({ onSchedule }) {
                 type="button"
                 onClick={() => setTemp((t) => clamp(t - 1))}
                 disabled={temp <= MIN}
-                className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink transition-colors hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-white/5"
+                className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-line bg-sunk/70 text-ink transition-colors hover:bg-sunk disabled:opacity-40 disabled:hover:bg-sunk"
                 aria-label="Decrease temperature by one degree"
               >
                 <Icon name="minus" size={20} />
@@ -261,7 +261,7 @@ export default function InteractiveThermostat({ onSchedule }) {
                 type="button"
                 onClick={() => setTemp((t) => clamp(t + 1))}
                 disabled={temp >= MAX}
-                className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink transition-colors hover:bg-white/10 disabled:opacity-40 disabled:hover:bg-white/5"
+                className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-line bg-sunk/70 text-ink transition-colors hover:bg-sunk disabled:opacity-40 disabled:hover:bg-sunk"
                 aria-label="Increase temperature by one degree"
               >
                 <Icon name="plus" size={20} />
@@ -308,7 +308,7 @@ export default function InteractiveThermostat({ onSchedule }) {
 
               {/* The payoff, revealed only in the perfect band. */}
               <Collapse open={climate.tone === 'perfect'}>
-                <div className="mt-6 border-t border-white/10 pt-6">
+                <div className="mt-6 border-t border-line pt-6">
                   <p className="font-display text-2xl font-semibold text-ink">
                     Let’s make your home feel like this.
                   </p>

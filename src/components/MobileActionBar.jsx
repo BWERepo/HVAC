@@ -23,9 +23,9 @@ export default function MobileActionBar({ onSchedule }) {
     >
       <nav
         aria-label="Quick contact"
-        className="mx-3 mb-3 flex items-center gap-1 rounded-2xl border border-white/12 bg-base/90 p-1.5 shadow-lift backdrop-blur-xl"
+        className="mx-3 mb-3 flex items-center gap-1 rounded-2xl border border-line bg-surface/95 p-1.5 shadow-lift backdrop-blur-xl"
       >
-        <a href={company.phoneHref} className={`${itemClass} text-cool hover:bg-white/8`}>
+        <a href={company.phoneHref} className={`${itemClass} text-cool-deep hover:bg-sunk`}>
           <Icon name="phone" size={20} />
           Call
         </a>
@@ -39,7 +39,7 @@ export default function MobileActionBar({ onSchedule }) {
           Schedule
         </button>
 
-        <a href={company.smsHref} className={`${itemClass} text-ink-soft hover:bg-white/8`}>
+        <a href={company.smsHref} className={`${itemClass} text-ink-soft hover:bg-sunk`}>
           <Icon name="message" size={20} />
           Text
         </a>

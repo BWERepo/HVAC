@@ -24,7 +24,8 @@ function Stat({ stat, active, index }) {
       <span className="tnum font-display text-[clamp(2.75rem,7vw,4.5rem)] leading-none font-bold tracking-tight">
         <span
           style={{
-            background: 'linear-gradient(160deg, var(--color-ink) 15%, var(--color-cool) 100%)',
+            background:
+              'linear-gradient(150deg, var(--color-ink) 10%, var(--color-sun-deep) 95%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             color: 'transparent',
@@ -41,9 +42,9 @@ function Stat({ stat, active, index }) {
               key={i}
               name="star"
               size={15}
-              className="text-warm"
+              className="text-sun"
               strokeWidth={1.4}
-              style={{ fill: 'var(--color-warm)' }}
+              style={{ fill: 'var(--color-sun)' }}
             />
           ))}
         </span>
@@ -60,7 +61,7 @@ export default function TrustStats() {
   const [ref, inView] = useInView({ threshold: 0.3 })
 
   return (
-    <section ref={ref} className="relative isolate overflow-clip border-y border-white/10 py-20 sm:py-24">
+    <section ref={ref} className="relative isolate overflow-clip border-y border-line py-20 sm:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 opacity-30"

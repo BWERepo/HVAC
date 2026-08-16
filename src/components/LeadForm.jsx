@@ -94,7 +94,7 @@ export default function LeadForm() {
               { icon: 'phone', text: `Prefer to talk? Call ${company.phone} any time.` },
             ].map((item) => (
               <li key={item.text} className="flex items-start gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-cool/12 text-cool">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-cool/12 text-cool-deep">
                   <Icon name={item.icon} size={19} />
                 </span>
                 <span className="pt-2 text-ink-soft">{item.text}</span>
@@ -111,7 +111,7 @@ export default function LeadForm() {
                   role="status"
                   style={{ animation: 'pc-pop 380ms var(--ease-out-soft) both' }}
                 >
-                  <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-fresh/15 text-fresh">
+                  <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-fresh/15 text-fresh-deep">
                     <Icon name="check" size={32} strokeWidth={2} />
                   </span>
                   <h3 className="mt-6 font-display text-2xl font-semibold text-ink">
@@ -122,7 +122,7 @@ export default function LeadForm() {
                     to confirm your appointment window.
                   </p>
 
-                  <p className="mx-auto mt-6 max-w-sm rounded-xl border border-white/10 bg-white/[0.03] p-4 text-xs leading-relaxed text-ink-faint">
+                  <p className="mx-auto mt-6 max-w-sm rounded-xl border border-line bg-sunk/70 p-4 text-xs leading-relaxed text-ink-faint">
                     This is a demonstration form. Nothing was submitted, sent or stored — your
                     details never left this page.
                   </p>

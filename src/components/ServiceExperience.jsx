@@ -89,7 +89,7 @@ export default function ServiceExperience({ service, index, onSchedule }) {
         >
           {/* ---- Artwork ---- */}
           <Reveal y={30}>
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-lift">
+            <div className="relative overflow-hidden rounded-[2rem] border border-line shadow-lift">
               <Scene
                 variant={sceneFor[service.id]}
                 alt={altFor[service.id]}
@@ -121,7 +121,7 @@ export default function ServiceExperience({ service, index, onSchedule }) {
 
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-linear-to-t from-base/60 to-transparent"
+                className="absolute inset-0 bg-linear-to-t from-canvas/60 to-transparent"
               />
             </div>
           </Reveal>
@@ -160,7 +160,7 @@ export default function ServiceExperience({ service, index, onSchedule }) {
                   as="li"
                   key={item}
                   delay={180 + i * 55}
-                  className="group flex items-center gap-4 border-t border-white/10 py-4 last:border-b"
+                  className="group flex items-center gap-4 border-t border-line py-4 last:border-b"
                 >
                   <span
                     className="tnum font-display text-xs font-semibold tabular-nums"

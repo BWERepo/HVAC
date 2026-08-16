@@ -18,7 +18,7 @@ function Meter({ label, value, active, accent, delay }) {
         </span>
       </div>
 
-      <div className="h-4 overflow-hidden rounded-full bg-white/[0.07]">
+      <div className="h-4 overflow-hidden rounded-full bg-sunk">
         <div
           className="h-full rounded-full transition-[width] duration-1000 ease-out"
           style={{
@@ -59,7 +59,7 @@ export default function EfficiencySection({ onSchedule }) {
           <div ref={ref} className="glass rounded-[var(--radius-card)] p-8 shadow-lift sm:p-10">
             <div className="flex items-center justify-between">
               <span className="eyebrow">Energy used for the same comfort</span>
-              <Icon name="gauge" size={22} className="text-cool" />
+              <Icon name="gauge" size={22} className="text-cool-deep" />
             </div>
 
             <div className="mt-8 space-y-8">
@@ -79,8 +79,8 @@ export default function EfficiencySection({ onSchedule }) {
               />
             </div>
 
-            <div className="mt-9 flex items-center gap-4 rounded-2xl border border-cool/25 bg-cool/[0.07] p-5">
-              <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-cool/15 text-cool">
+            <div className="mt-9 flex items-center gap-4 rounded-2xl border border-cool/40 bg-cool/8 p-5">
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-cool/15 text-cool-deep">
                 <Icon name="bolt" size={24} />
               </span>
               <p className="text-sm leading-relaxed text-ink-soft">

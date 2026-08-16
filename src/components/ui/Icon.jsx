@@ -107,7 +107,55 @@ const paths = {
   plus: <path d="M12 5v14M5 12h14" />,
   minus: <path d="M5 12h14" />,
 
-  // Simplified social glyphs — placeholder links on this demonstration.
+  // Simplified social glyphs drawn in this icon set's own visual language —
+  // geometric approximations for a demonstration with placeholder links, not
+  // official brand assets. Swap in real brand marks for a live customer site.
+  x: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4.5" />
+      <path d="M7.8 7.8l8.4 8.4M16.2 7.8l-8.4 8.4" />
+    </>
+  ),
+  tiktok: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4.5" />
+      <path d="M14.3 7v6.6a2.9 2.9 0 1 1-2.5-2.87" />
+      <path d="M14.3 7c.35 1.35 1.4 2.3 2.8 2.5" />
+    </>
+  ),
+  linkedin: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4.5" />
+      <path d="M7.7 10.6V17M7.7 7.5v.1M11.6 17v-6.4M11.6 13.6a2.1 2.1 0 0 1 4.2 0V17" />
+    </>
+  ),
+  pinterest: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4.5" />
+      <path d="M10.4 18.6 12.3 10" />
+      <path d="M9.9 12.6a3.1 3.1 0 1 1 3.6 3.1" />
+    </>
+  ),
+  google: (
+    <>
+      <circle cx="12" cy="12" r="8.6" />
+      <path d="M12 10.7h4.4a4.5 4.5 0 1 1-1.35-3.1" />
+    </>
+  ),
+  yelp: (
+    <>
+      <path d="M13 4.6v7.3l5.3-2.5" />
+      <path d="M13 14.3l3.7 4.3" />
+      <path d="M11.1 13.7 6.3 15.5" />
+      <path d="M11.1 11.5 6.5 8.9" />
+    </>
+  ),
+  nextdoor: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4.5" />
+      <path d="M8.6 16.6v-9.2l6.8 9.2v-9.2" />
+    </>
+  ),
   facebook: (
     <>
       <rect x="3" y="3" width="18" height="18" rx="4.5" />

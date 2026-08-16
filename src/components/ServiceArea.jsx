@@ -45,14 +45,14 @@ export default function ServiceArea() {
                   onBlur={() => setActive(null)}
                   className={`flex w-full cursor-pointer items-center gap-2.5 rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
                     active === i
-                      ? 'border-cool/50 bg-cool/10 text-ink'
-                      : 'border-white/10 bg-white/[0.03] text-ink-soft hover:border-white/25'
+                      ? 'border-cool bg-cool/10 text-ink'
+                      : 'border-line bg-sunk/70 text-ink-soft hover:border-line-strong'
                   }`}
                 >
                   <Icon
                     name="mapPin"
                     size={17}
-                    className={active === i ? 'text-cool' : 'text-ink-faint'}
+                    className={active === i ? 'text-cool-deep' : 'text-ink-faint'}
                   />
                   <span className="text-[0.95rem] font-medium">{area}</span>
                 </button>
@@ -66,20 +66,20 @@ export default function ServiceArea() {
         </div>
 
         <Reveal delay={120}>
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface shadow-lift">
+          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-surface shadow-lift">
             <svg viewBox="0 0 680 500" className="w-full" role="img" aria-label="Stylised map of the service area">
               <defs>
                 <radialGradient id="area-glow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="var(--color-cool)" stopOpacity=".22" />
-                  <stop offset="100%" stopColor="var(--color-cool)" stopOpacity="0" />
+                  <stop offset="0%" stopColor="var(--color-sun)" stopOpacity=".3" />
+                  <stop offset="100%" stopColor="var(--color-sun)" stopOpacity="0" />
                 </radialGradient>
               </defs>
 
-              <rect width="680" height="500" fill="#0B1224" />
+              <rect width="680" height="500" fill="#EAF4FA" />
               <circle cx="340" cy="250" r="230" fill="url(#area-glow)" />
 
               {/* Abstract road grid */}
-              <g stroke="var(--color-cool)" strokeOpacity=".1" strokeWidth="1">
+              <g stroke="var(--color-cool)" strokeOpacity=".18" strokeWidth="1">
                 {Array.from({ length: 9 }, (_, i) => (
                   <path key={`h${i}`} d={`M0 ${40 + i * 55}h680`} />
                 ))}
@@ -89,13 +89,13 @@ export default function ServiceArea() {
               </g>
 
               {/* Arterials */}
-              <g stroke="var(--color-cool)" strokeOpacity=".28" strokeWidth="2.5" fill="none">
+              <g stroke="var(--color-cool)" strokeOpacity=".45" strokeWidth="3" fill="none">
                 <path d="M-10 320 q180-70 340-40 t360-80" />
                 <path d="M120 -10 q40 200 150 280 t180 240" />
               </g>
 
               {/* Coverage rings */}
-              <g fill="none" stroke="var(--color-cool)" strokeOpacity=".2" strokeDasharray="4 8">
+              <g fill="none" stroke="var(--color-cool-deep)" strokeOpacity=".35" strokeDasharray="4 8">
                 <circle cx="340" cy="250" r="120" />
                 <circle cx="340" cy="250" r="195" />
               </g>
@@ -107,13 +107,13 @@ export default function ServiceArea() {
                 return (
                   <g key={area} style={{ transition: 'opacity 250ms' }}>
                     {isActive && (
-                      <circle cx={p.x} cy={p.y} r="26" fill="var(--color-cool)" opacity=".18" />
+                      <circle cx={p.x} cy={p.y} r="26" fill="var(--color-sun)" opacity=".28" />
                     )}
                     <circle
                       cx={p.x}
                       cy={p.y}
                       r={isActive ? 7 : 5}
-                      fill={isActive ? 'var(--color-cool)' : 'var(--color-sky)'}
+                      fill={isActive ? 'var(--color-sun)' : 'var(--color-cool)'}
                       opacity={isActive ? 1 : 0.65}
                       style={{ transition: 'all 250ms var(--ease-out-soft)' }}
                     />
@@ -134,8 +134,8 @@ export default function ServiceArea() {
 
               {/* Base of operations */}
               <g>
-                <circle cx="340" cy="250" r="12" fill="var(--color-cool)" opacity=".2" />
-                <circle cx="340" cy="250" r="6" fill="var(--color-cool)" />
+                <circle cx="340" cy="250" r="12" fill="var(--color-sun)" opacity=".35" />
+                <circle cx="340" cy="250" r="6" fill="var(--color-sun-deep)" />
               </g>
             </svg>
           </div>

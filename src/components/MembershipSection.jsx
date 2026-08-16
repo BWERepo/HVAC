@@ -14,7 +14,7 @@ const icons = ['wrench', 'clock', 'shield', 'gauge', 'wind', 'sparkle']
 export default function MembershipSection({ onSchedule }) {
   return (
     <Section id="membership" accent="fresh">
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-linear-to-br from-surface to-base p-8 sm:p-12 lg:p-16">
+      <div className="relative overflow-hidden rounded-[2rem] border border-line bg-linear-to-br from-surface to-sunk p-8 sm:p-12 lg:p-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full opacity-40 blur-3xl"
@@ -44,7 +44,7 @@ export default function MembershipSection({ onSchedule }) {
             {membership.benefits.map((benefit, i) => (
               <Reveal key={benefit.title} delay={i * 70}>
                 <div className="flex gap-4">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-fresh/12 text-fresh">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-fresh/15 text-fresh-deep">
                     <Icon name={icons[i % icons.length]} size={20} />
                   </span>
                   <div>

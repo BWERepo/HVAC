@@ -17,7 +17,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-void">
+    <footer className="border-t border-line bg-sunk">
       <div className="u-container py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Identity + direct contact */}
@@ -30,16 +30,16 @@ export default function Footer() {
             <div className="mt-6 space-y-2.5">
               <a
                 href={company.phoneHref}
-                className="flex items-center gap-2.5 text-ink transition-colors hover:text-cool"
+                className="flex items-center gap-2.5 text-ink transition-colors hover:text-cool-deep"
               >
-                <Icon name="phone" size={17} className="text-cool" />
+                <Icon name="phone" size={17} className="text-cool-deep" />
                 <span className="tnum font-medium">{company.phone}</span>
               </a>
               <a
                 href={`mailto:${company.email}`}
-                className="flex items-center gap-2.5 text-ink-soft transition-colors hover:text-cool"
+                className="flex items-center gap-2.5 text-ink-soft transition-colors hover:text-cool-deep"
               >
-                <Icon name="message" size={17} className="text-cool" />
+                <Icon name="message" size={17} className="text-cool-deep" />
                 <span className="text-sm break-all">{company.email}</span>
               </a>
             </div>
@@ -50,7 +50,7 @@ export default function Footer() {
                   <a
                     href="#top"
                     aria-label={social.label}
-                    className="flex size-11 items-center justify-center rounded-full border border-white/12 text-ink-soft transition-colors hover:border-cool/50 hover:text-cool"
+                    className="flex size-11 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-cool/50 hover:text-cool-deep"
                   >
                     <Icon name={social.icon} size={19} />
                   </a>
@@ -71,7 +71,7 @@ export default function Footer() {
                         target without changing how the list reads. */}
                     <a
                       href={link.href}
-                      className="inline-block py-1.5 text-sm text-ink-soft transition-colors hover:text-cool"
+                      className="inline-block py-1.5 text-sm text-ink-soft transition-colors hover:text-cool-deep"
                     >
                       {link.label}
                     </a>
@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-ink-faint">
             © {new Date().getFullYear()} {company.fullName}. {company.license}
           </p>
@@ -105,7 +105,7 @@ export default function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="inline-block py-1.5 text-xs text-ink-faint transition-colors hover:text-cool"
+                  className="inline-block py-1.5 text-xs text-ink-faint transition-colors hover:text-cool-deep"
                 >
                   {link.label}
                 </a>
@@ -125,14 +125,14 @@ export default function Footer() {
  */
 export function DemoDisclaimer() {
   return (
-    <aside className="border-t border-white/10 bg-base">
+    <aside className="border-t border-bwe-clay/25 bg-bwe-ink">
       <div className="u-container flex flex-col items-center gap-5 py-10 text-center">
-        <p className="max-w-3xl text-sm leading-relaxed text-ink-faint">{demoDisclaimer}</p>
+        <p className="max-w-3xl text-sm leading-relaxed text-bwe-cream/65">{demoDisclaimer}</p>
         <a
           href={bwe.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 font-display text-lg font-semibold text-bwe-clay transition-colors hover:text-cool"
+          className="group inline-flex items-center gap-2 font-display text-lg font-semibold text-bwe-cream transition-colors hover:text-bwe-clay"
         >
           BusinessWebExpress.com
           <Icon

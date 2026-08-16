@@ -54,7 +54,7 @@ export default function Header({ onSchedule }) {
       <header
         className={`sticky top-0 z-40 border-b transition-all duration-300 ease-out ${
           scrolled
-            ? 'border-white/10 bg-base/85 backdrop-blur-xl backdrop-saturate-150'
+            ? 'border-line bg-canvas/88 backdrop-blur-xl backdrop-saturate-150 shadow-soft'
             : 'border-transparent bg-transparent'
         }`}
       >
@@ -108,7 +108,7 @@ export default function Header({ onSchedule }) {
           <div className="flex items-center gap-1 lg:hidden">
             <a
               href={company.phoneHref}
-              className="flex size-11 items-center justify-center rounded-full text-cool transition-colors hover:bg-white/10"
+              className="flex size-11 items-center justify-center rounded-full text-cool-deep transition-colors hover:bg-sunk"
               aria-label={`Call emergency service at ${company.phone}`}
             >
               <Icon name="phone" size={21} />
@@ -116,7 +116,7 @@ export default function Header({ onSchedule }) {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-white/10"
+              className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-sunk"
               aria-label="Open menu"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
@@ -133,7 +133,7 @@ export default function Header({ onSchedule }) {
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
-            className={`fixed inset-0 z-50 bg-base/95 backdrop-blur-xl transition-opacity duration-250 ease-out lg:hidden ${
+            className={`fixed inset-0 z-50 bg-canvas/97 backdrop-blur-xl transition-opacity duration-250 ease-out lg:hidden ${
               menu.visible ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -142,7 +142,7 @@ export default function Header({ onSchedule }) {
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
-                className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-white/10"
+                className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-sunk"
                 aria-label="Close menu"
                 autoFocus
               >
@@ -159,7 +159,7 @@ export default function Header({ onSchedule }) {
                   style={{
                     animation: `pc-rise 400ms var(--ease-out-soft) ${60 + i * 50}ms both`,
                   }}
-                  className="border-b border-white/10 py-5 font-display text-3xl font-semibold text-ink"
+                  className="border-b border-line py-5 font-display text-3xl font-semibold text-ink"
                 >
                   {item.label}
                 </a>

@@ -53,7 +53,7 @@ export default function Testimonials() {
             onClick={() => scrollBy(-1)}
             disabled={atStart}
             aria-label="Previous testimonials"
-            className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink transition-colors hover:bg-white/10 disabled:opacity-35 disabled:hover:bg-white/5"
+            className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-line bg-sunk/70 text-ink transition-colors hover:bg-sunk disabled:opacity-35 disabled:hover:bg-sunk"
           >
             <Icon name="chevronLeft" size={20} />
           </button>
@@ -62,7 +62,7 @@ export default function Testimonials() {
             onClick={() => scrollBy(1)}
             disabled={atEnd}
             aria-label="More testimonials"
-            className="flex size-12 rotate-180 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink transition-colors hover:bg-white/10 disabled:opacity-35 disabled:hover:bg-white/5"
+            className="flex size-12 rotate-180 cursor-pointer items-center justify-center rounded-full border border-line bg-sunk/70 text-ink transition-colors hover:bg-sunk disabled:opacity-35 disabled:hover:bg-sunk"
           >
             <Icon name="chevronLeft" size={20} />
           </button>
@@ -89,9 +89,9 @@ export default function Testimonials() {
                       key={i}
                       name="star"
                       size={15}
-                      className="text-warm"
+                      className="text-sun"
                       strokeWidth={1.4}
-                      style={{ fill: 'var(--color-warm)' }}
+                      style={{ fill: 'var(--color-sun)' }}
                     />
                   ))}
                 </span>
@@ -100,8 +100,8 @@ export default function Testimonials() {
                   “{t.quote}”
                 </blockquote>
 
-                <figcaption className="mt-7 flex items-center gap-3 border-t border-white/10 pt-5">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-cool/15 font-display text-sm font-semibold text-cool">
+                <figcaption className="mt-7 flex items-center gap-3 border-t border-line pt-5">
+                  <span className="flex size-10 items-center justify-center rounded-full bg-cool/15 font-display text-sm font-semibold text-cool-deep">
                     {t.name.charAt(0)}
                   </span>
                   <span>
