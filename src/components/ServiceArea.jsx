@@ -123,7 +123,7 @@ export default function ServiceArea() {
                       fill="currentColor"
                       className={isActive ? 'fill-ink' : 'fill-ink-faint'}
                       fontSize="13"
-                      fontFamily="Inter, sans-serif"
+                      fontFamily="Geist, sans-serif"
                       style={{ transition: 'all 250ms' }}
                     >
                       {area}

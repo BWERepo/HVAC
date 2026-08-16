@@ -1,7 +1,33 @@
-import { stats, trustIndicators } from '../data/site'
+import { googleReviews, stats, trustIndicators } from '../data/site'
 import { useCountUp, useInView } from '../lib/hooks'
-import Icon from './ui/Icon'
+import Icon, { GoogleGIcon } from './ui/Icon'
 import Reveal from './ui/Reveal'
+
+/** Compact Google trust badge — reuses the star-rating treatment from
+ *  Testimonials rather than introducing a new visual language, and stays a
+ *  small inline strip rather than a full section with its own heading. */
+function GoogleBadge() {
+  return (
+    <Reveal
+      as="a"
+      href={googleReviews.href}
+      aria-label={googleReviews.ariaLabel}
+      delay={trustIndicators.length * 60}
+      className="mx-auto mt-8 flex w-fit items-center gap-2.5 rounded-full border border-line bg-surface/80 px-4 py-2 shadow-soft transition-colors hover:border-line-strong"
+    >
+      <GoogleGIcon size={18} />
+      <span className="tnum font-display text-sm font-bold text-ink">{googleReviews.rating}</span>
+      <span className="flex gap-0.5" aria-hidden="true">
+        {Array.from({ length: 5 }, (_, i) => (
+          <Icon key={i} name="star" size={13} className="text-sun" strokeWidth={1.4} style={{ fill: 'var(--color-sun)' }} />
+        ))}
+      </span>
+      <span className="text-xs font-medium text-ink-faint">
+        {googleReviews.reviewCount} Google reviews
+      </span>
+    </Reveal>
+  )
+}
 
 function Stat({ stat, active, index }) {
   const value = useCountUp(stat.value ?? 0, {
@@ -91,6 +117,8 @@ export default function TrustStats() {
             </Reveal>
           ))}
         </ul>
+
+        <GoogleBadge />
 
         <div className="mx-auto mt-14 max-w-4xl border-t border-line pt-14">
           <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">

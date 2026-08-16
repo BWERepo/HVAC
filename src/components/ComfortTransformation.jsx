@@ -1,11 +1,63 @@
 import { useCallback, useRef, useState } from 'react'
-import { transformation } from '../data/site'
+import { efficiency, transformation } from '../data/site'
+import { useCountUp, useInView } from '../lib/hooks'
+import Button from './ui/Button'
 import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Scene from './ui/Scene'
 import Section, { SectionHeading } from './ui/Section'
 
-export default function ComfortTransformation() {
+/** Compact energy-use comparison folded into the before/after section rather
+ *  than running as its own full section — same "old vs new is better"
+ *  message as the slider above, so it earns a strip, not a second section. */
+function EfficiencyStrip({ onSchedule }) {
+  const [ref, inView] = useInView({ threshold: 0.4 })
+  const delta = efficiency.older.value - efficiency.modern.value
+  const olderShown = useCountUp(efficiency.older.value, { active: inView, duration: 1200 })
+  const modernShown = useCountUp(efficiency.modern.value, { active: inView, duration: 1200 })
+
+  return (
+    <div
+      ref={ref}
+      className="mt-10 grid gap-6 rounded-2xl border border-cool/30 bg-cool/6 p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8"
+    >
+      <div>
+        <span className="eyebrow" style={{ color: 'var(--color-cool-deep)' }}>
+          Energy used for the same comfort
+        </span>
+        <div className="mt-3 space-y-2.5">
+          {[
+            { label: efficiency.older.label, value: efficiency.older.value, shown: olderShown, accent: 'var(--color-warm)' },
+            { label: efficiency.modern.label, value: efficiency.modern.value, shown: modernShown, accent: 'var(--color-cool)' },
+          ].map((row) => (
+            <div key={row.label} className="flex items-center gap-3">
+              <span className="w-36 shrink-0 text-sm font-medium text-ink-soft">{row.label}</span>
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-sunk">
+                <div
+                  className="h-full rounded-full transition-[width] duration-1000 ease-out"
+                  style={{ width: inView ? `${row.value}%` : '0%', background: row.accent }}
+                />
+              </div>
+              <span className="tnum w-10 shrink-0 text-right text-sm font-semibold text-ink">
+                {Math.round(row.shown)}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-xs leading-relaxed text-ink-faint">
+          Illustration only — roughly <span className="font-semibold text-ink">{delta}% less</span> energy
+          for the same comfort. {efficiency.disclaimer}
+        </p>
+      </div>
+
+      <Button size="md" onClick={onSchedule} iconRight="arrowRight" className="justify-self-start sm:justify-self-end">
+        {efficiency.cta}
+      </Button>
+    </div>
+  )
+}
+
+export default function ComfortTransformation({ onSchedule }) {
   const [pos, setPos] = useState(50)
   const [dragging, setDragging] = useState(false)
   const frameRef = useRef(null)
@@ -153,6 +205,8 @@ export default function ComfortTransformation() {
             )
           })}
         </div>
+
+        <EfficiencyStrip onSchedule={onSchedule} />
       </Reveal>
     </Section>
   )

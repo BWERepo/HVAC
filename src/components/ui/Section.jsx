@@ -25,7 +25,7 @@ export default function Section({
     <section
       id={id}
       style={{ '--sect-accent': accents[accent] ?? accents.cool }}
-      className={`relative isolate overflow-clip py-20 sm:py-28 lg:py-32 ${className}`}
+      className={`relative isolate overflow-clip py-16 sm:py-22 lg:py-26 ${className}`}
       {...rest}
     >
       {glow && (

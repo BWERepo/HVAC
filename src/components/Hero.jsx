@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import heroFamilyPhoto from '../assets/hero-family.jpg'
 import { company, hero } from '../data/site'
 import { useCountUp, usePrefersReducedMotion } from '../lib/hooks'
 import Button from './ui/Button'
@@ -144,7 +145,14 @@ export default function Hero() {
           className="absolute inset-0 scale-110"
           style={{ transform: `translate3d(0, ${parallax}px, 0) scale(1.1)` }}
         >
-          <Scene variant="home" ratio="auto" className="h-full" priority />
+          <Scene
+            variant="home"
+            ratio="auto"
+            className="h-full"
+            priority
+            src={heroFamilyPhoto}
+            alt="A happy family relaxing together at home — sample demonstration photography, not the actual business."
+          />
         </div>
 
         {/* Legibility scrim — the headline must never fight the artwork. */}

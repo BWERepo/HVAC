@@ -446,6 +446,16 @@ export const stats = [
   { value: 100, suffix: '%', label: 'Satisfaction Commitment' },
 ]
 
+// PLACEHOLDER — invented rating/review count for the demo. `href` points
+// back to the top of the page, matching the same placeholder convention used
+// for `socials` above, since there is no real Google Business Profile to link.
+export const googleReviews = {
+  rating: 4.9,
+  reviewCount: 214,
+  href: '#top',
+  ariaLabel: 'Google Business Profile — placeholder link, sample demonstration content',
+}
+
 // Horizontal, icon-driven trust indicators — not a stat grid, not a card
 // grid. Nothing here is a fabricated number, so it needs no sample-content
 // label on its own.
@@ -529,34 +539,38 @@ export const serviceAreas = [
 ]
 
 // PLACEHOLDER — invented staff. Replace with the customer's real team.
+// `photo` is an optional imported image (see Hero.jsx's heroFamilyPhoto for
+// the pattern) — left empty here because no headshots exist yet. When a real
+// photo set ships, import each file in TeamSection.jsx and set it here; the
+// component already renders it in place of the monogram when present.
 export const team = [
   {
     name: 'Ray Alvarez',
     role: 'Founder & Lead Technician',
-    experience: '22 years in the trade',
-    bio: 'Started as an apprentice on install crews and still runs the hardest diagnostic calls personally. Believes most "you need a new system" quotes deserve a second look.',
+    experience: '22 yrs',
     initials: 'RA',
+    photo: undefined,
   },
   {
     name: 'Nina Okafor',
     role: 'Service Manager',
-    experience: '11 years in the trade',
-    bio: 'Runs dispatch and makes the call on what counts as an emergency. The reason the schedule holds together on the worst week of August.',
+    experience: '11 yrs',
     initials: 'NO',
+    photo: undefined,
   },
   {
     name: 'Caleb Voss',
     role: 'Installation Lead',
-    experience: '14 years in the trade',
-    bio: 'Specialises in retrofit installs in older homes where nothing is standard. Known on the crew for leaving a mechanical room tidier than it was found.',
+    experience: '14 yrs',
     initials: 'CV',
+    photo: undefined,
   },
   {
     name: 'Priya Raman',
-    role: 'Indoor Air Quality Specialist',
-    experience: '8 years in the trade',
-    bio: 'Handles filtration, humidity and ventilation design. Often the person who finds the duct problem behind a comfort complaint.',
+    role: 'Air Quality Specialist',
+    experience: '8 yrs',
     initials: 'PR',
+    photo: undefined,
   },
 ]
 

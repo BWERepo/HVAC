@@ -3,7 +3,6 @@ import { services } from './data/site'
 
 import BusinessWebExpressCTA from './components/BusinessWebExpressCTA'
 import ComfortTransformation from './components/ComfortTransformation'
-import EfficiencySection from './components/EfficiencySection'
 import EmergencyCTA from './components/EmergencyCTA'
 import EstimateWizard from './components/EstimateWizard'
 import FinancingSection from './components/FinancingSection'
@@ -19,8 +18,8 @@ import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
 import ServiceExperience from './components/ServiceExperience'
 import ServiceGrid from './components/ServiceGrid'
-import EquipmentExplorer from './components/EquipmentExplorer'
 import FinalCTA from './components/FinalCTA'
+import SocialRail from './components/SocialRail'
 import TeamSection from './components/TeamSection'
 import TopBar from './components/TopBar'
 import Testimonials from './components/Testimonials'
@@ -46,6 +45,7 @@ export default function App() {
 
       <TopBar />
       <Header onSchedule={openSheet} />
+      <SocialRail />
 
       <main id="main">
         <Hero />
@@ -65,10 +65,8 @@ export default function App() {
 
         <ServiceGrid />
         <EstimateWizard />
-        <EquipmentExplorer onSchedule={openSheet} />
         <Testimonials />
-        <ComfortTransformation />
-        <EfficiencySection onSchedule={openSheet} />
+        <ComfortTransformation onSchedule={openSheet} />
         <ServiceArea />
         <TeamSection />
         <MembershipSection onSchedule={openSheet} />

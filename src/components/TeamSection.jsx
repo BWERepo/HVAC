@@ -1,75 +1,84 @@
+import calebPhoto from '../assets/team/caleb.jpg'
+import ninaPhoto from '../assets/team/nina.jpg'
+import priyaPhoto from '../assets/team/priya.jpg'
+import rayPhoto from '../assets/team/ray.jpg'
 import { team } from '../data/site'
-import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Section, { SectionHeading } from './ui/Section'
 
+// Real headshots for this demo, keyed by name so `site.js` stays plain data
+// (see Hero.jsx's `heroFamilyPhoto` import for the same pattern).
+const photosByName = {
+  'Ray Alvarez': rayPhoto,
+  'Nina Okafor': ninaPhoto,
+  'Caleb Voss': calebPhoto,
+  'Priya Raman': priyaPhoto,
+}
+
 /**
- * No staff photography ships with this demo, so each person gets a monogram
- * portrait built from the palette. Swapping in real headshots means adding a
- * `photo` field to the team data and rendering it here — nothing else changes.
+ * No staff photography ships with this demo, so each person gets a small
+ * monogram badge built from the palette. Swapping in real headshots means
+ * importing each file (see Hero.jsx's `heroFamilyPhoto` for the pattern),
+ * setting it on the matching `team` entry's `photo` field in site.js, and
+ * this component renders it in place of the monogram automatically.
  */
-function Portrait({ initials, index }) {
+function Portrait({ photo, initials, name, index }) {
   const tints = ['var(--color-cool)', 'var(--color-fresh)', 'var(--color-sun)', 'var(--color-warm)']
   const tint = tints[index % tints.length]
 
+  if (photo) {
+    return (
+      <img
+        src={photo}
+        alt={`Headshot of ${name} — sample demonstration photography, not the actual business.`}
+        className="size-16 shrink-0 rounded-full object-cover sm:size-[4.5rem]"
+      />
+    )
+  }
+
   return (
     <div
-      className="relative flex aspect-4/5 w-full items-center justify-center overflow-hidden rounded-2xl"
+      className="flex size-16 shrink-0 items-center justify-center rounded-full sm:size-[4.5rem]"
       aria-hidden="true"
       style={{
-        background: `radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, ${tint} 22%, transparent), var(--color-surface) 70%)`,
+        background: `radial-gradient(120% 120% at 30% 20%, color-mix(in oklab, ${tint} 26%, transparent), var(--color-surface) 75%)`,
       }}
     >
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          background: `repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in oklab, ${tint} 7%, transparent) 22px 23px)`,
-        }}
-      />
-      <span
-        className="relative font-display text-6xl font-light tracking-tight"
-        style={{ color: tint }}
-      >
+      <span className="font-display text-lg font-semibold" style={{ color: tint }}>
         {initials}
       </span>
-      <span
-        className="absolute inset-x-0 bottom-0 h-24"
-        style={{ background: 'linear-gradient(to top, var(--color-surface), transparent)' }}
-      />
     </div>
   )
 }
 
 export default function TeamSection() {
   return (
-    <Section id="team" accent="cool">
+    <Section id="team" accent="cool" className="border-t border-line">
       <SectionHeading
         eyebrow="The people"
-        title="Technology Makes Us Smarter. People Make Us Better."
-        sub="Smart equipment is only as good as the crew that sizes, installs and services it."
+        title="The Crew Behind the Work."
+        sub="Smart equipment is only as good as the people who size, install and service it."
       />
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-8">
         {team.map((person, i) => (
-          <Reveal key={person.name} delay={i * 90}>
-            <article className="group h-full rounded-[var(--radius-card)] border border-line bg-sunk/70 p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-line-strong hover:bg-sunk">
-              <Portrait initials={person.initials} index={i} />
-
-              <div className="px-2 pt-5 pb-3">
-                <h3 className="font-display text-lg font-semibold text-ink">{person.name}</h3>
-                <p className="mt-1 text-sm font-medium text-cool-deep">{person.role}</p>
-
-                <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-faint">
-                  <Icon name="clock" size={13} />
-                  {person.experience}
-                </p>
-
-                <p className="mt-4 text-sm leading-relaxed text-ink-soft">{person.bio}</p>
+          <Reveal key={person.name} delay={i * 80} as="li">
+            <div className="flex items-center gap-4">
+              <Portrait
+                photo={person.photo ?? photosByName[person.name]}
+                initials={person.initials}
+                name={person.name}
+                index={i}
+              />
+              <div>
+                <p className="font-display text-base font-semibold text-ink">{person.name}</p>
+                <p className="text-sm font-medium text-cool-deep">{person.role}</p>
+                <p className="text-xs text-ink-faint">{person.experience} experience</p>
               </div>
-            </article>
+            </div>
           </Reveal>
         ))}
-      </div>
+      </ul>
 
       <p className="mt-10 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
         Sample demonstration content
