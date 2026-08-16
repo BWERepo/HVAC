@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react'
 
 import BusinessWebExpressCTA from './components/BusinessWebExpressCTA'
-import ComfortTransformation from './components/ComfortTransformation'
-import EmergencyCTA from './components/EmergencyCTA'
 import EstimateWizard from './components/EstimateWizard'
 import FinancingSection from './components/FinancingSection'
 import Footer, { DemoDisclaimer } from './components/Footer'
@@ -49,12 +47,9 @@ export default function App() {
         <InteractiveThermostat onSchedule={openSheet} />
         <TrustStats />
         <ProblemSelector onSchedule={openSheet} />
-        <EmergencyCTA />
-
         <ServiceGrid />
         <EstimateWizard />
         <Testimonials />
-        <ComfortTransformation onSchedule={openSheet} />
         <ServiceArea />
         <TeamSection />
         <MembershipSection onSchedule={openSheet} />

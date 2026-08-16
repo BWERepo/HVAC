@@ -16,7 +16,7 @@ const photosByName = {
 }
 
 /**
- * No staff photography ships with this demo, so each person gets a small
+ * No staff photography ships with this demo, so each person gets a large
  * monogram badge built from the palette. Swapping in real headshots means
  * importing each file (see Hero.jsx's `heroFamilyPhoto` for the pattern),
  * setting it on the matching `team` entry's `photo` field in site.js, and
@@ -31,20 +31,20 @@ function Portrait({ photo, initials, name, index }) {
       <img
         src={photo}
         alt={`Headshot of ${name} — sample demonstration photography, not the actual business.`}
-        className="size-24 shrink-0 rounded-full object-cover sm:size-28"
+        className="aspect-square w-full rounded-2xl object-cover shadow-lift"
       />
     )
   }
 
   return (
     <div
-      className="flex size-24 shrink-0 items-center justify-center rounded-full sm:size-28"
+      className="flex aspect-square w-full items-center justify-center rounded-2xl"
       aria-hidden="true"
       style={{
         background: `radial-gradient(120% 120% at 30% 20%, color-mix(in oklab, ${tint} 26%, transparent), var(--color-surface) 75%)`,
       }}
     >
-      <span className="font-display text-2xl font-semibold" style={{ color: tint }}>
+      <span className="font-display text-5xl font-semibold" style={{ color: tint }}>
         {initials}
       </span>
     </div>
@@ -60,21 +60,19 @@ export default function TeamSection() {
         sub="Smart equipment is only as good as the people who size, install and service it."
       />
 
-      <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-8">
+      <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-x-8">
         {team.map((person, i) => (
           <Reveal key={person.name} delay={i * 80} as="li">
-            <div className="flex items-center gap-4">
+            <div className="mx-auto max-w-[220px] text-center">
               <Portrait
                 photo={person.photo ?? photosByName[person.name]}
                 initials={person.initials}
                 name={person.name}
                 index={i}
               />
-              <div>
-                <p className="font-display text-base font-semibold text-ink">{person.name}</p>
-                <p className="text-sm font-medium text-cool-deep">{person.role}</p>
-                <p className="text-xs text-ink-faint">{person.experience} experience</p>
-              </div>
+              <p className="mt-4 font-display text-lg font-semibold text-ink">{person.name}</p>
+              <p className="text-sm font-medium text-cool-deep">{person.role}</p>
+              <p className="text-xs text-ink-faint">{person.experience} experience</p>
             </div>
           </Reveal>
         ))}

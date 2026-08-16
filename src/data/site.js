@@ -76,7 +76,7 @@ export const hero = {
   targetTemp: 72,
   tempCaption: 'Feels pretty good, doesn’t it?',
   primaryCta: { label: 'Schedule Service', href: '#estimate' },
-  secondaryCta: { label: 'Call Now', href: '#emergency' },
+  secondaryCta: { label: 'Call Now', href: '#lead-form' },
 }
 
 /**
@@ -192,7 +192,7 @@ export const serviceCatalog = [
     what: '24/7 emergency HVAC repair when a system fails without warning.',
     benefit: 'Help when you need it, not just during business hours.',
     cta: 'Call Now',
-    href: '#emergency',
+    href: '#lead-form',
     size: 'lg',
   },
 ]
@@ -566,7 +566,7 @@ export const footerColumns = [
       { label: 'Cooling', href: '#all-services' },
       { label: 'Indoor Air Quality', href: '#all-services' },
       { label: 'Maintenance', href: '#membership' },
-      { label: 'Emergency Service', href: '#emergency' },
+      { label: 'Emergency Service', href: '#lead-form' },
       { label: 'Financing', href: '#lead-form' },
     ],
   },
