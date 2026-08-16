@@ -163,12 +163,12 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 34%, color-mix(in oklab, var(--color-canvas) 55%, transparent) 52%, transparent 72%)',
+              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 24%, color-mix(in oklab, var(--color-canvas) 42%, transparent) 40%, transparent 58%)',
           }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-canvas/30 via-transparent to-canvas/85"
+          className="absolute inset-0 bg-linear-to-b from-canvas/15 via-transparent to-canvas/65"
         />
 
         <Airflow />
