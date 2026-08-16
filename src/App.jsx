@@ -1,0 +1,80 @@
+import { useCallback, useState } from 'react'
+import { services } from './data/site'
+
+import BusinessWebExpressCTA from './components/BusinessWebExpressCTA'
+import ComfortTransformation from './components/ComfortTransformation'
+import DemoBanner from './components/DemoBanner'
+import EfficiencySection from './components/EfficiencySection'
+import EmergencyCTA from './components/EmergencyCTA'
+import EstimateWizard from './components/EstimateWizard'
+import Footer, { DemoDisclaimer } from './components/Footer'
+import Header from './components/Header'
+import Hero from './components/Hero'
+import InteractiveThermostat from './components/InteractiveThermostat'
+import LeadForm from './components/LeadForm'
+import MembershipSection from './components/MembershipSection'
+import MobileActionBar from './components/MobileActionBar'
+import ProblemSelector from './components/ProblemSelector'
+import ScheduleBottomSheet from './components/ScheduleBottomSheet'
+import ServiceArea from './components/ServiceArea'
+import ServiceExperience from './components/ServiceExperience'
+import TeamSection from './components/TeamSection'
+import Testimonials from './components/Testimonials'
+import TrustStats from './components/TrustStats'
+
+export default function App() {
+  const [sheetOpen, setSheetOpen] = useState(false)
+
+  // Every "schedule" affordance on the page routes through here, so there is
+  // exactly one booking surface to maintain.
+  const openSheet = useCallback(() => setSheetOpen(true), [])
+  const closeSheet = useCallback(() => setSheetOpen(false), [])
+
+  return (
+    // Bottom padding clears the fixed mobile action bar.
+    <div className="pb-[76px] lg:pb-0">
+      <a
+        href="#main"
+        className="sr-only rounded-full bg-cool px-5 py-3 font-semibold text-[#04121a] focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
+      >
+        Skip to main content
+      </a>
+
+      <DemoBanner />
+      <Header onSchedule={openSheet} />
+
+      <main id="main">
+        <Hero />
+        <InteractiveThermostat onSchedule={openSheet} />
+
+        {services.map((service, i) => (
+          <ServiceExperience
+            key={service.id}
+            service={service}
+            index={i}
+            onSchedule={openSheet}
+          />
+        ))}
+
+        <ProblemSelector onSchedule={openSheet} />
+        <EstimateWizard />
+        <TrustStats />
+        <Testimonials />
+        <ComfortTransformation />
+        <EfficiencySection onSchedule={openSheet} />
+        <ServiceArea />
+        <TeamSection />
+        <MembershipSection onSchedule={openSheet} />
+        <EmergencyCTA />
+        <LeadForm />
+      </main>
+
+      <Footer />
+      <BusinessWebExpressCTA />
+      <DemoDisclaimer />
+
+      <MobileActionBar onSchedule={openSheet} />
+      <ScheduleBottomSheet open={sheetOpen} onClose={closeSheet} />
+    </div>
+  )
+}
