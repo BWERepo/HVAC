@@ -153,7 +153,7 @@ export default function InteractiveThermostat({ onSchedule }) {
               onPointerUp={endDrag}
               onPointerCancel={endDrag}
               onKeyDown={onKeyDown}
-              className={`relative size-[19rem] touch-none select-none sm:size-[23rem] ${
+              className={`relative size-64 touch-none select-none sm:size-[19rem] lg:size-[23rem] ${
                 dragging ? 'cursor-grabbing' : 'cursor-grab'
               }`}
             >

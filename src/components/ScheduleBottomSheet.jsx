@@ -215,7 +215,7 @@ export default function ScheduleBottomSheet({ open, onClose }) {
                   <p className="mb-3 text-sm font-medium text-ink">
                     {scheduleSheet.timingQuestion}
                   </p>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {scheduleSheet.timingOptions.map((option) => (
                       <button
                         key={option}

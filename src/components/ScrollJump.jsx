@@ -14,7 +14,7 @@ export default function ScrollJump() {
   }
 
   return (
-    <div className="fixed right-5 bottom-[calc(76px+1.25rem)] z-40 flex flex-col gap-2 lg:right-24 lg:bottom-6">
+    <div className="fixed right-5 bottom-[calc(76px+env(safe-area-inset-bottom)+1.25rem)] z-40 flex flex-col gap-2 lg:right-24 lg:bottom-6">
       <button
         type="button"
         onClick={() => scrollTo(0)}
