@@ -7,8 +7,13 @@ import {
   serviceAreas,
   socials,
 } from '../data/site'
+import versionInfo from '../../version.json'
 import Icon from './ui/Icon'
 import Logo from './ui/Logo'
+
+// Build date is set at each deploy — see PROJECT_STATUS.md's deploy history
+// for the full record; this is just a quick visible marker on the page.
+const BUILD_DATE = '2026-08-16'
 
 export default function Footer() {
   return (
@@ -142,6 +147,10 @@ export function DemoDisclaimer() {
             className="transition-transform group-hover:translate-x-1"
           />
         </a>
+
+        <p className="tnum text-[0.68rem] tracking-[0.14em] text-bwe-cream/35 uppercase">
+          v{versionInfo.version} · {BUILD_DATE}
+        </p>
       </div>
     </aside>
   )
