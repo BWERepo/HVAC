@@ -87,27 +87,19 @@ export const hero = {
  */
 export const quickHelp = {
   eyebrow: 'Quick help',
-  title: 'What’s Wrong With Your System?',
-  sub: 'Tell us what’s going on and we’ll take it from there.',
+  title: 'What Can We Help You With?',
+  sub: 'Answer a few quick questions and we’ll take it from there.',
   options: [
-    {
-      id: 'no-cooling',
-      label: 'AC Not Cooling',
-      icon: 'sun',
-    },
-    {
-      id: 'no-heat',
-      label: 'Heat Not Working',
-      icon: 'snow',
-      emergency: true,
-    },
-    {
-      id: 'other',
-      label: 'Other HVAC Problem',
-      icon: 'wrench',
-    },
+    { id: 'no-cooling', label: 'AC Isn’t Cooling', icon: 'snow' },
+    { id: 'no-heat', label: 'Heat Isn’t Working', icon: 'flame' },
+    { id: 'air-quality', label: 'Air Quality / Airflow Problem', icon: 'wind' },
+    { id: 'other', label: 'Something Else', icon: 'wrench' },
   ],
-  revealTitle: 'We can help. Tell us where to reach you.',
+  urgencyTitle: 'We can help. How soon do you need service?',
+  urgencyOptions: ['Today', 'Tomorrow', 'This Week', 'Just Getting an Estimate'],
+  zipTitle: 'What’s your ZIP code?',
+  zipSub: 'So we can confirm we cover your area.',
+  contactTitle: 'Almost there — how should we reach you?',
   cta: 'Request Service',
 }
 
