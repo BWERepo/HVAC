@@ -155,16 +155,20 @@ export default function Hero() {
           />
         </div>
 
-        {/* Legibility scrim — the headline must never fight the photo behind
-            it. Tuned darker than the original SVG-art version: a real photo
-            has far more local contrast than the abstract art did. */}
+        {/* Legibility scrim — solid only behind the text column on the left,
+            clearing quickly so the photo reads clearly on the right two
+            thirds of the hero rather than washing out everywhere. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-canvas/80 via-canvas/68 to-canvas"
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to right, var(--color-canvas) 0%, var(--color-canvas) 34%, color-mix(in oklab, var(--color-canvas) 55%, transparent) 52%, transparent 72%)',
+          }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-r from-canvas via-canvas/88 to-canvas/25"
+          className="absolute inset-0 bg-linear-to-b from-canvas/30 via-transparent to-canvas/85"
         />
 
         <Airflow />
