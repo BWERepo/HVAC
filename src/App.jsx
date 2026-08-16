@@ -6,6 +6,7 @@ import ComfortTransformation from './components/ComfortTransformation'
 import EfficiencySection from './components/EfficiencySection'
 import EmergencyCTA from './components/EmergencyCTA'
 import EstimateWizard from './components/EstimateWizard'
+import FinancingSection from './components/FinancingSection'
 import Footer, { DemoDisclaimer } from './components/Footer'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -17,6 +18,9 @@ import ProblemSelector from './components/ProblemSelector'
 import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
 import ServiceExperience from './components/ServiceExperience'
+import ServiceGrid from './components/ServiceGrid'
+import EquipmentExplorer from './components/EquipmentExplorer'
+import FinalCTA from './components/FinalCTA'
 import TeamSection from './components/TeamSection'
 import TopBar from './components/TopBar'
 import Testimonials from './components/Testimonials'
@@ -46,6 +50,9 @@ export default function App() {
       <main id="main">
         <Hero />
         <InteractiveThermostat onSchedule={openSheet} />
+        <TrustStats />
+        <ProblemSelector onSchedule={openSheet} />
+        <EmergencyCTA />
 
         {services.map((service, i) => (
           <ServiceExperience
@@ -56,16 +63,17 @@ export default function App() {
           />
         ))}
 
-        <ProblemSelector onSchedule={openSheet} />
+        <ServiceGrid />
         <EstimateWizard />
-        <TrustStats />
+        <EquipmentExplorer onSchedule={openSheet} />
         <Testimonials />
         <ComfortTransformation />
         <EfficiencySection onSchedule={openSheet} />
         <ServiceArea />
         <TeamSection />
         <MembershipSection onSchedule={openSheet} />
-        <EmergencyCTA />
+        <FinancingSection />
+        <FinalCTA onSchedule={openSheet} />
         <LeadForm />
       </main>
 

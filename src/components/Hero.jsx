@@ -159,22 +159,30 @@ export default function Hero() {
 
         <Airflow />
 
-        {/* Slow ambient light */}
+        {/* A single confident block of brand colour, not an ambient blur —
+            it reads as an intentional editorial accent rather than a glow. */}
         <div
           aria-hidden="true"
-          className={`absolute -top-1/4 left-1/2 size-[42rem] -translate-x-1/2 rounded-full blur-3xl ${
-            reduced ? '' : 'anim-drift'
-          }`}
+          className="absolute top-0 right-0 h-full w-[38%] opacity-[0.14]"
           style={{
-            background:
-              'radial-gradient(circle, color-mix(in oklab, var(--color-sun) 34%, transparent), transparent 70%)',
+            background: 'linear-gradient(200deg, var(--color-sun) 0%, transparent 62%)',
+            clipPath: 'polygon(100% 0, 100% 100%, 30% 100%, 62% 0)',
           }}
         />
       </div>
 
+      {/* Oversized ghost numeral — an editorial type moment bleeding off the
+          left edge, deliberately larger than anything else on the page. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-6 -left-10 -z-[5] hidden font-display text-[26rem] leading-none font-bold text-ink/[0.035] select-none sm:block"
+      >
+        72°
+      </span>
+
       <div className="u-container">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
-          <div>
+        <div className="grid items-center gap-14 lg:grid-cols-[1.32fr_0.68fr] lg:gap-8">
+          <div className="relative border-l-4 border-sun-deep/70 pl-6 sm:pl-8">
             <p
               className="eyebrow mb-6"
               style={{
@@ -184,7 +192,10 @@ export default function Hero() {
               {company.region.replace('the ', '')} · Since day one
             </p>
 
-            <h1 className="text-[clamp(2.4rem,7.2vw,5.25rem)] font-bold">
+            <h1
+              className="text-[clamp(2.6rem,7.6vw,5.75rem)] font-bold"
+              style={{ letterSpacing: '-0.045em' }}
+            >
               {hero.headline.map((line, i) => (
                 <span
                   key={line}
@@ -193,7 +204,7 @@ export default function Hero() {
                     animation: reduced
                       ? undefined
                       : `pc-rise 900ms var(--ease-out-soft) ${120 + i * 130}ms both`,
-                    color: i === 2 ? 'var(--color-sun-deep)' : undefined,
+                    color: i === 1 ? 'var(--color-sun-deep)' : undefined,
                   }}
                 >
                   {line}
@@ -212,6 +223,18 @@ export default function Hero() {
               {hero.sub}
             </p>
 
+            <p
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold tracking-[0.08em] text-alert-deep uppercase"
+              style={{
+                animation: reduced
+                  ? undefined
+                  : 'pc-rise 900ms var(--ease-out-soft) 630ms both',
+              }}
+            >
+              <Icon name="alert" size={16} />
+              {hero.emergencyLine}
+            </p>
+
             <div
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
               style={{
@@ -223,10 +246,22 @@ export default function Hero() {
               <Button as="a" href={hero.primaryCta.href} size="lg" iconRight="arrowRight">
                 {hero.primaryCta.label}
               </Button>
-              <Button as="a" href={hero.secondaryCta.href} variant="outline" size="lg" icon="alert">
+              <Button as="a" href={company.phoneHref} variant="outline" size="lg" icon="phone">
                 {hero.secondaryCta.label}
               </Button>
             </div>
+
+            <a
+              href={company.phoneHref}
+              className="tnum mt-6 inline-block text-2xl font-bold text-ink transition-colors hover:text-sun-deep sm:text-3xl"
+              style={{
+                animation: reduced
+                  ? undefined
+                  : 'pc-rise 900ms var(--ease-out-soft) 770ms both',
+              }}
+            >
+              {company.phone}
+            </a>
 
             <ul
               className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-faint"
@@ -246,7 +281,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:translate-y-8 lg:justify-end lg:-rotate-1"
             style={{
               animation: reduced ? undefined : 'pc-rise 1000ms var(--ease-out-soft) 420ms both',
             }}

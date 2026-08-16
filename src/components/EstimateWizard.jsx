@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { wizard, wizardRecommendations } from '../data/site'
 import { usePrefersReducedMotion, useScrollTo } from '../lib/hooks'
+import { formatPhone, validateField } from '../lib/validation'
 import Button from './ui/Button'
+import Field from './ui/Field'
 import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Section, { SectionHeading } from './ui/Section'
@@ -13,6 +15,9 @@ export default function EstimateWizard() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({})
   const [direction, setDirection] = useState(1)
+  const [contact, setContact] = useState({ name: '', phone: '' })
+  const [contactErrors, setContactErrors] = useState({})
+  const [submitted, setSubmitted] = useState(false)
 
   const total = wizard.steps.length
   const done = step >= total
@@ -32,7 +37,21 @@ export default function EstimateWizard() {
   const restart = () => {
     setDirection(-1)
     setAnswers({})
+    setContact({ name: '', phone: '' })
+    setContactErrors({})
+    setSubmitted(false)
     setStep(0)
+  }
+
+  const submitContact = (e) => {
+    e.preventDefault()
+    const errors = {
+      name: validateField('name', contact.name),
+      phone: validateField('phone', contact.phone),
+    }
+    const clean = Object.fromEntries(Object.entries(errors).filter(([, v]) => v))
+    setContactErrors(clean)
+    if (Object.keys(clean).length === 0) setSubmitted(true)
   }
 
   const recommendation =
@@ -145,18 +164,66 @@ export default function EstimateWizard() {
 
                 <p className="mt-6 rounded-xl border border-line bg-sunk/70 p-4 text-sm leading-relaxed text-ink-faint">
                   This is a general direction, not a quote. Accurate pricing needs a load
-                  calculation and a look at your existing equipment and ductwork — which is
-                  exactly what the estimate visit is for.
+                  calculation and a look at your existing equipment and ductwork — an HVAC
+                  professional can recommend appropriate options once they see your home.
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button size="lg" onClick={() => scrollTo('#lead-form')} iconRight="arrowRight">
-                    Request My Personalized Estimate
-                  </Button>
-                  <Button variant="ghost" size="lg" onClick={restart}>
-                    Start over
-                  </Button>
-                </div>
+                {!submitted ? (
+                  <form onSubmit={submitContact} noValidate className="mt-8 space-y-4">
+                    <p className="font-display text-lg font-semibold text-ink">
+                      Where should we send your estimate?
+                    </p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field
+                        label="Your name"
+                        value={contact.name}
+                        error={contactErrors.name}
+                        onChange={(e) => setContact((c) => ({ ...c, name: e.target.value }))}
+                        autoComplete="name"
+                      />
+                      <Field
+                        label="Phone number"
+                        type="tel"
+                        value={contact.phone}
+                        error={contactErrors.phone}
+                        onChange={(e) =>
+                          setContact((c) => ({ ...c, phone: formatPhone(e.target.value) }))
+                        }
+                        autoComplete="tel"
+                        placeholder="(555) 555-0142"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <Button type="submit" size="lg" iconRight="arrowRight">
+                        Request My Estimate
+                      </Button>
+                      <Button type="button" variant="ghost" size="lg" onClick={restart}>
+                        Start over
+                      </Button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="mt-8 flex items-start gap-3 rounded-xl border border-fresh-deep/30 bg-fresh/10 p-5">
+                    <Icon name="check" size={20} className="mt-0.5 shrink-0 text-fresh-deep" />
+                    <div>
+                      <p className="font-display font-semibold text-ink">
+                        Thanks, {contact.name.split(' ')[0] || 'there'} — request received.
+                      </p>
+                      <p className="mt-1 text-sm text-ink-soft">
+                        This demo doesn’t send data anywhere; on a real site this would notify
+                        our team to follow up with your personalized estimate. You can also{' '}
+                        <button
+                          type="button"
+                          onClick={() => scrollTo('#lead-form')}
+                          className="cursor-pointer font-medium text-cool-deep underline underline-offset-2"
+                        >
+                          call or message us directly
+                        </button>
+                        .
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

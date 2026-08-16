@@ -18,8 +18,8 @@ export default function ProblemSelector({ onSchedule }) {
     <Section id="diagnostic" accent="cool">
       <SectionHeading
         eyebrow="Quick help"
-        title="What’s happening at your house?"
-        sub="Tell us what you’re experiencing and we’ll help point you in the right direction."
+        title="What’s Happening in Your Home?"
+        sub="Tell us what you’re experiencing and we’ll point you in the right direction — no guesswork, no diagnosis, just a next step."
       />
 
       <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

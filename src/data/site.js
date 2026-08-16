@@ -52,24 +52,31 @@ export const socials = [
   { id: 'x', label: 'X', href: '#top' },
   { id: 'linkedin', label: 'LinkedIn', href: '#top' },
   { id: 'pinterest', label: 'Pinterest', href: '#top' },
+  // These two are real, functional contact channels (not social profiles),
+  // reusing the same reserved 555-01xx fiction number as the rest of the site.
+  { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/15555550142' },
+  { id: 'sms', label: 'Text Us', href: company.smsHref },
 ]
 
 export const nav = [
-  { label: 'Cooling', href: '#cooling' },
-  { label: 'Heating', href: '#heating' },
-  { label: 'Air Quality', href: '#air-quality' },
+  { label: 'Services', href: '#cooling' },
+  { label: 'Emergency HVAC', href: '#emergency' },
   { label: 'Maintenance', href: '#membership' },
+  { label: 'Financing', href: '#financing' },
+  { label: 'Reviews', href: '#testimonials' },
   { label: 'About', href: '#team' },
+  { label: 'Contact', href: '#lead-form' },
 ]
 
 export const hero = {
-  headline: ['YOUR HOME.', 'YOUR COMFORT.', 'PERFECTLY CONTROLLED.'],
-  sub: 'Heating, cooling and indoor air quality designed around the way your family lives.',
+  headline: ['YOUR COMFORT.', 'OUR PRIORITY.'],
+  sub: 'Professional Heating, Cooling & Indoor Air Quality Services',
+  emergencyLine: '24/7 Emergency HVAC Service',
   serviceLine: ['Heating', 'Cooling', 'Indoor Air Quality', '24/7 Emergency Service'],
   targetTemp: 72,
   tempCaption: 'Feels pretty good, doesn’t it?',
-  primaryCta: { label: 'Get My Comfort Estimate', href: '#estimate' },
-  secondaryCta: { label: 'I Need Help Now', href: '#emergency' },
+  primaryCta: { label: 'Schedule Service', href: '#estimate' },
+  secondaryCta: { label: 'Call Now', href: '#emergency' },
 }
 
 /**
@@ -200,9 +207,171 @@ export const problems = [
   },
 ]
 
+/**
+ * Full service catalog — the 3 `services` pillars above stay as the
+ * immersive alternating sections; this extends coverage to the fuller list
+ * from the brief as a secondary, denser grid (Air Conditioning / Heating /
+ * Heat Pumps / Mini Splits / Indoor Air Quality / Maintenance / Emergency).
+ * `size` drives an asymmetric bento layout so the grid doesn't read as
+ * equal-size generic cards.
+ */
+export const serviceCatalog = [
+  {
+    id: 'catalog-ac',
+    title: 'Air Conditioning',
+    accent: 'cool',
+    icon: 'snow',
+    what: 'Repair, replacement and installation for central AC systems.',
+    benefit: 'Even cooling in every room, sized right for your home.',
+    cta: 'Explore AC Service',
+    href: '#cooling',
+    size: 'lg',
+  },
+  {
+    id: 'catalog-heating',
+    title: 'Heating',
+    accent: 'warm',
+    icon: 'sun',
+    what: 'Furnace repair, installation and seasonal heating maintenance.',
+    benefit: 'Dependable warmth through the coldest months.',
+    cta: 'Explore Heating',
+    href: '#heating',
+    size: 'lg',
+  },
+  {
+    id: 'catalog-heat-pumps',
+    title: 'Heat Pumps',
+    accent: 'fresh',
+    icon: 'gauge',
+    what: 'High-efficiency heat pump service, repair and installation.',
+    benefit: 'One system, efficient heating and cooling year-round.',
+    cta: 'Learn About Heat Pumps',
+    href: '#estimate',
+    size: 'md',
+  },
+  {
+    id: 'catalog-mini-splits',
+    title: 'Ductless Mini Splits',
+    accent: 'cool',
+    icon: 'wind',
+    what: 'Ductless system installation for additions, garages and retrofits.',
+    benefit: 'Room-by-room comfort without new ductwork.',
+    cta: 'Ask About Mini Splits',
+    href: '#estimate',
+    size: 'md',
+  },
+  {
+    id: 'catalog-iaq',
+    title: 'Indoor Air Quality',
+    accent: 'fresh',
+    icon: 'leaf',
+    what: 'Filtration, purification, humidity control and duct services.',
+    benefit: 'Air that feels as good as the temperature.',
+    cta: 'Improve My Air',
+    href: '#air-quality',
+    size: 'md',
+  },
+  {
+    id: 'catalog-maintenance',
+    title: 'Maintenance',
+    accent: 'fresh',
+    icon: 'wrench',
+    what: 'Seasonal tune-ups that catch small issues before they grow.',
+    benefit: 'Fewer breakdowns, longer equipment life.',
+    cta: 'Join the Comfort Club',
+    href: '#membership',
+    size: 'md',
+  },
+  {
+    id: 'catalog-emergency',
+    title: 'Emergency Service',
+    accent: 'alert',
+    icon: 'alert',
+    what: '24/7 emergency HVAC repair when a system fails without warning.',
+    benefit: 'Help when you need it, not just during business hours.',
+    cta: 'Call Now',
+    href: '#emergency',
+    size: 'lg',
+  },
+]
+
+/**
+ * "Find the Right Comfort System for Your Home" — premium interactive
+ * equipment explorer. Benefits are homeowner-facing outcomes, not spec
+ * sheets, per the brief's "consumer product, not contractor list" note.
+ */
+export const equipment = {
+  title: 'Find the Right Comfort System for Your Home',
+  sub: 'Every home is different. Explore the main system types and see which fits how you live.',
+  options: [
+    {
+      id: 'central-ac',
+      label: 'Central AC',
+      icon: 'snow',
+      accent: 'cool',
+      summary: 'Whole-home cooling through your existing ductwork.',
+      benefits: [
+        'Even temperatures in every room',
+        'Works with your existing ducts',
+        'Pairs with a smart thermostat',
+      ],
+    },
+    {
+      id: 'heat-pumps',
+      label: 'Heat Pumps',
+      icon: 'gauge',
+      accent: 'fresh',
+      summary: 'One system that heats and cools efficiently, year-round.',
+      benefits: [
+        'Heating and cooling in a single system',
+        'Lower operating costs in moderate climates',
+        'Modern, quiet outdoor units',
+      ],
+    },
+    {
+      id: 'furnaces',
+      label: 'Furnaces',
+      icon: 'sun',
+      accent: 'warm',
+      summary: 'Fast, powerful heat for cold-weather reliability.',
+      benefits: [
+        'Strong performance in the coldest months',
+        'Wide range of efficiency tiers',
+        'Long service life with regular maintenance',
+      ],
+    },
+    {
+      id: 'mini-splits',
+      label: 'Ductless Mini Splits',
+      icon: 'wind',
+      accent: 'cool',
+      summary: 'Targeted comfort for rooms your ductwork can’t reach.',
+      benefits: [
+        'No ductwork required',
+        'Independent control room by room',
+        'Ideal for additions and older homes',
+      ],
+    },
+    {
+      id: 'iaq',
+      label: 'Indoor Air Quality',
+      icon: 'leaf',
+      accent: 'fresh',
+      summary: 'Filtration and humidity control that clean the air itself.',
+      benefits: [
+        'Fewer airborne allergens and dust',
+        'More stable indoor humidity',
+        'Works alongside any system type',
+      ],
+    },
+  ],
+  cta: 'See What Fits My Home',
+}
+
 export const wizard = {
-  title: 'Thinking About Replacing Your System?',
-  sub: 'Get a ballpark recommendation in about 60 seconds.',
+  title: 'GET MY ESTIMATE',
+  sub: 'Answer a few quick questions for a ballpark recommendation — no pricing promised, just a starting point.',
+  ctaLabel: 'Request My Estimate',
   steps: [
     {
       id: 'homeType',
@@ -235,6 +404,18 @@ export const wizard = {
       question: 'How old is your current system?',
       options: ['Under 5 years', '5–10 years', '10–15 years', '15+ years', 'Not sure'],
     },
+    {
+      id: 'concern',
+      question: 'What’s your primary concern?',
+      options: [
+        'No heat',
+        'No AC',
+        'Rising energy bills',
+        'Noisy or aging equipment',
+        'Poor air quality',
+        'Just exploring options',
+      ],
+    },
   ],
 }
 
@@ -261,6 +442,18 @@ export const stats = [
   { value: 2500, suffix: '+', label: 'Homes Made Comfortable' },
   { value: null, display: '24/7', label: 'Emergency Service' },
   { value: 100, suffix: '%', label: 'Satisfaction Commitment' },
+]
+
+// Horizontal, icon-driven trust indicators — not a stat grid, not a card
+// grid. Nothing here is a fabricated number, so it needs no sample-content
+// label on its own.
+export const trustIndicators = [
+  { icon: 'shield', label: 'Licensed & Insured' },
+  { icon: 'star', label: '5-Star Service' },
+  { icon: 'sliders', label: 'Upfront Pricing' },
+  { icon: 'calendar', label: 'Financing Available' },
+  { icon: 'check', label: 'Satisfaction Focused' },
+  { icon: 'mapPin', label: 'Locally Trusted' },
 ]
 
 // PLACEHOLDER — invented reviews from invented customers.
@@ -376,8 +569,33 @@ export const membership = {
     { title: 'Filter reminders', detail: 'A nudge when it is actually time — not on a generic timer.' },
     { title: 'No overtime fee', detail: 'On qualifying service calls, evenings and weekends included.' },
   ],
-  cta: 'Explore Comfort Membership',
+  cta: 'Join the Comfort Club',
 }
+
+export const financing = {
+  title: 'Comfort Now. Flexible Payment Options.',
+  sub: 'Flexible financing options may be available for qualified homeowners — ask us when you schedule.',
+  points: [
+    'Options for repairs, replacements and new installs',
+    'Simple application process',
+    'Terms depend on approval and qualification',
+  ],
+  disclaimer:
+    'Sample demonstration content. No specific rates, terms or approval are guaranteed here — a real financing partner would supply actual offer details.',
+  cta: 'Explore Financing',
+}
+
+// Payment methods accepted for standard (non-financed) service — shown as a
+// trust row near the financing pitch. Real card-network marks would replace
+// these placeholder glyphs on a live customer site.
+export const paymentMethods = [
+  { id: 'visa', label: 'Visa' },
+  { id: 'mastercard', label: 'Mastercard' },
+  { id: 'amex', label: 'American Express' },
+  { id: 'discover', label: 'Discover' },
+  { id: 'paypal', label: 'PayPal' },
+  { id: 'applePay', label: 'Apple Pay' },
+]
 
 export const efficiency = {
   title: 'Stop Paying to Condition the Outdoors.',
@@ -411,6 +629,14 @@ export const scheduleSheet = {
   needOptions: ['No Cooling', 'No Heat', 'Maintenance', 'New System', 'Air Quality', 'Something Else'],
   timingQuestion: 'Preferred timing',
   timingOptions: ['ASAP', 'Today', 'Tomorrow', 'This Week'],
+}
+
+export const finalCta = {
+  title: 'Your Home Should Feel Comfortable Again.',
+  sub: 'Whether it’s a repair, a replacement or a system you’ve been meaning to look into, our team is ready when you are.',
+  primaryCta: { label: 'Schedule Service' },
+  secondaryCta: { label: 'Call Now' },
+  trust: ['Licensed & Insured', 'Upfront Pricing', '24/7 Emergency Service', 'Locally Trusted'],
 }
 
 export const bwe = {

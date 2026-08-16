@@ -5,15 +5,10 @@ import {
   footerColumns,
   legalLinks,
   serviceAreas,
+  socials,
 } from '../data/site'
 import Icon from './ui/Icon'
 import Logo from './ui/Logo'
-
-const socials = [
-  { icon: 'facebook', label: 'Facebook (placeholder link)' },
-  { icon: 'instagram', label: 'Instagram (placeholder link)' },
-  { icon: 'youtube', label: 'YouTube (placeholder link)' },
-]
 
 export default function Footer() {
   return (
@@ -44,18 +39,24 @@ export default function Footer() {
               </a>
             </div>
 
-            <ul className="mt-7 flex gap-2">
-              {socials.map((social) => (
-                <li key={social.icon}>
-                  <a
-                    href="#top"
-                    aria-label={social.label}
-                    className="flex size-11 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-cool/50 hover:text-cool-deep"
-                  >
-                    <Icon name={social.icon} size={19} />
-                  </a>
-                </li>
-              ))}
+            <ul className="mt-7 flex flex-wrap gap-2">
+              {socials.map((social) => {
+                const isContactLink = social.id === 'sms' || social.id === 'whatsapp'
+                return (
+                  <li key={social.id}>
+                    <a
+                      href={social.href}
+                      aria-label={
+                        isContactLink ? social.label : `${social.label} (placeholder link)`
+                      }
+                      title={social.label}
+                      className="flex size-11 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-cool/50 hover:text-cool-deep"
+                    >
+                      <Icon name={social.id} size={19} />
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

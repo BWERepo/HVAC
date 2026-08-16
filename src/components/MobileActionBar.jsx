@@ -27,7 +27,7 @@ export default function MobileActionBar({ onSchedule }) {
       >
         <a href={company.phoneHref} className={`${itemClass} text-cool-deep hover:bg-sunk`}>
           <Icon name="phone" size={20} />
-          Call
+          Call Now
         </a>
 
         <button

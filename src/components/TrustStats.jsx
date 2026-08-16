@@ -1,6 +1,7 @@
-import { stats } from '../data/site'
+import { stats, trustIndicators } from '../data/site'
 import { useCountUp, useInView } from '../lib/hooks'
 import Icon from './ui/Icon'
+import Reveal from './ui/Reveal'
 
 function Stat({ stat, active, index }) {
   const value = useCountUp(stat.value ?? 0, {
@@ -57,11 +58,16 @@ function Stat({ stat, active, index }) {
   )
 }
 
+/**
+ * Two tiers: a clean horizontal row of icon-driven trust indicators (no
+ * fabricated numbers, so no sample-content label needed) sits above the
+ * animated invented stats, which keep their existing disclosure.
+ */
 export default function TrustStats() {
   const [ref, inView] = useInView({ threshold: 0.3 })
 
   return (
-    <section ref={ref} className="relative isolate overflow-clip border-y border-line py-20 sm:py-24">
+    <section ref={ref} className="relative isolate overflow-clip border-y border-line py-16 sm:py-20">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 opacity-30"
@@ -72,16 +78,32 @@ export default function TrustStats() {
       />
 
       <div className="u-container">
-        <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">
-          {stats.map((stat, i) => (
-            <Stat key={stat.label} stat={stat} active={inView} index={i} />
+        {/* Horizontal icon-driven trust row */}
+        <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-5 sm:gap-x-12">
+          {trustIndicators.map((item, i) => (
+            <Reveal key={item.label} delay={i * 60} as="li" className="flex items-center gap-2.5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-cool/12 text-cool-deep transition-transform duration-300 hover:scale-110">
+                <Icon name={item.icon} size={17} />
+              </span>
+              <span className="text-sm font-semibold text-ink-soft sm:text-[0.95rem]">
+                {item.label}
+              </span>
+            </Reveal>
           ))}
-        </div>
+        </ul>
 
-        {/* Required honesty: these numbers are invented for the demonstration. */}
-        <p className="mt-14 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
-          Sample demonstration content
-        </p>
+        <div className="mx-auto mt-14 max-w-4xl border-t border-line pt-14">
+          <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">
+            {stats.map((stat, i) => (
+              <Stat key={stat.label} stat={stat} active={inView} index={i} />
+            ))}
+          </div>
+
+          {/* Required honesty: these numbers are invented for the demonstration. */}
+          <p className="mt-14 text-center text-xs tracking-[0.12em] text-ink-faint/70 uppercase">
+            Sample demonstration content
+          </p>
+        </div>
       </div>
     </section>
   )

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { testimonials } from '../data/site'
+import { usePrefersReducedMotion } from '../lib/hooks'
 import Icon from './ui/Icon'
 import Reveal from './ui/Reveal'
 import Section, { SectionHeading } from './ui/Section'
@@ -8,6 +9,8 @@ export default function Testimonials() {
   const trackRef = useRef(null)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const reduced = usePrefersReducedMotion()
 
   const syncEdges = useCallback(() => {
     const el = trackRef.current
@@ -28,17 +31,38 @@ export default function Testimonials() {
     }
   }, [syncEdges])
 
-  const scrollBy = (dir) => {
+  const scrollBy = useCallback((dir) => {
     const el = trackRef.current
     if (!el) return
     // Advance by one card so the snap points line up predictably.
     const card = el.querySelector('[data-card]')
     const amount = card ? card.offsetWidth + 20 : el.clientWidth * 0.8
     el.scrollBy({ left: dir * amount, behavior: 'smooth' })
-  }
+  }, [])
+
+  // Gentle auto-advance — pauses on hover/focus and never runs under
+  // reduced motion. Stops for good once the user reaches the last card.
+  useEffect(() => {
+    if (reduced || paused || atEnd) return
+    const id = setInterval(() => scrollBy(1), 6000)
+    return () => clearInterval(id)
+  }, [reduced, paused, atEnd, scrollBy])
 
   return (
     <Section id="testimonials" accent="cool">
+      <Reveal className="mx-auto mb-10 flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1.5 rounded-full border border-line bg-surface/80 px-5 py-2.5 text-center shadow-soft sm:w-fit sm:flex-nowrap">
+        <span className="flex items-center gap-2">
+          <span className="tnum font-display text-2xl font-bold text-ink">4.9</span>
+          <span className="flex gap-0.5" aria-hidden="true">
+            {Array.from({ length: 5 }, (_, i) => (
+              <Icon key={i} name="star" size={16} className="text-sun" strokeWidth={1.4} style={{ fill: 'var(--color-sun)' }} />
+            ))}
+          </span>
+        </span>
+        <span className="hidden h-4 w-px bg-line sm:block" aria-hidden="true" />
+        <span className="text-sm font-medium text-ink-soft">Trusted by Local Homeowners</span>
+      </Reveal>
+
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <SectionHeading
           align="left"
@@ -74,6 +98,10 @@ export default function Testimonials() {
           ref={trackRef}
           tabIndex={0}
           aria-label="Customer testimonials, scrollable"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
           className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-4 md:-mx-8 md:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {testimonials.map((t) => (
