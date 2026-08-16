@@ -155,14 +155,16 @@ export default function Hero() {
           />
         </div>
 
-        {/* Legibility scrim — the headline must never fight the artwork. */}
+        {/* Legibility scrim — the headline must never fight the photo behind
+            it. Tuned darker than the original SVG-art version: a real photo
+            has far more local contrast than the abstract art did. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-b from-canvas/60 via-canvas/45 to-canvas"
+          className="absolute inset-0 bg-linear-to-b from-canvas/80 via-canvas/68 to-canvas"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-r from-canvas/95 via-canvas/70 to-transparent"
+          className="absolute inset-0 bg-linear-to-r from-canvas via-canvas/88 to-canvas/25"
         />
 
         <Airflow />
