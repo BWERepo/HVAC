@@ -39,6 +39,7 @@ export default function Button({
   size = 'md',
   icon,
   iconRight,
+  subLabel,
   className = '',
   children,
   ...rest
@@ -47,20 +48,30 @@ export default function Button({
   if (Tag === 'button' && !rest.type) rest.type = 'button'
 
   return (
-    <Tag className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} {...rest}>
+    <Tag
+      className={`${base} ${variants[variant]} ${sizes[size]} ${subLabel ? '!flex-col !gap-0.5 !py-3' : ''} ${className}`}
+      {...rest}
+    >
       {/* Hover sheen — pure transform, and hidden from the a11y tree. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-linear-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[220%]"
       />
-      {icon ? <Icon name={icon} size={18} className="relative shrink-0" /> : null}
-      <span className="relative">{children}</span>
-      {iconRight ? (
-        <Icon
-          name={iconRight}
-          size={18}
-          className="relative shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-        />
+      <span className="relative inline-flex items-center gap-2.5">
+        {icon ? <Icon name={icon} size={18} className="shrink-0" /> : null}
+        <span>{children}</span>
+        {iconRight ? (
+          <Icon
+            name={iconRight}
+            size={18}
+            className="shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+          />
+        ) : null}
+      </span>
+      {subLabel ? (
+        <span className="relative text-[0.7em] font-medium tracking-[0.02em] opacity-75 normal-case">
+          {subLabel}
+        </span>
       ) : null}
     </Tag>
   )

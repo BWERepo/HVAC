@@ -95,10 +95,16 @@ export default function Header({ onSchedule }) {
             })}
           </nav>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <Button as="a" href={company.phoneHref} variant="ghost" size="sm" icon="phone">
-              Emergency Service
-            </Button>
+          <div className="hidden items-center gap-4 lg:flex">
+            <a
+              href={company.phoneHref}
+              className="flex flex-col items-end leading-tight transition-opacity hover:opacity-80"
+            >
+              <span className="text-[0.68rem] font-semibold tracking-[0.08em] text-alert-deep uppercase">
+                24/7 Emergency
+              </span>
+              <span className="tnum text-base font-bold text-ink">{company.phone}</span>
+            </a>
             <Button size="sm" onClick={onSchedule}>
               Schedule Service
             </Button>

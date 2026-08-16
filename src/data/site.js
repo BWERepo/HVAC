@@ -60,7 +60,6 @@ export const socials = [
 
 export const nav = [
   { label: 'Services', href: '#cooling' },
-  { label: 'Emergency HVAC', href: '#emergency' },
   { label: 'Maintenance', href: '#membership' },
   { label: 'Financing', href: '#financing' },
   { label: 'Reviews', href: '#testimonials' },
@@ -93,13 +92,14 @@ export const services = [
     blurb:
       'Even temperatures in every room, quiet operation, and equipment sized properly for your home — not for whatever fit in the truck.',
     items: [
-      'AC Repair',
-      'AC Replacement',
-      'Preventive Maintenance',
-      'High-Efficiency Systems',
-      'Smart Thermostats',
+      { label: 'AC Repair', detail: 'Fast diagnosis and same-day fixes for a system that won’t keep up.' },
+      { label: 'AC Replacement', detail: 'A properly sized system, installed cleanly, for the long haul.' },
+      { label: 'Preventive Maintenance', detail: 'Seasonal tune-ups that catch small issues before they grow.' },
+      { label: 'High-Efficiency Systems', detail: 'Modern equipment that cools more while running less.' },
+      { label: 'Smart Thermostats', detail: 'Precise, app-connected control over every room.' },
     ],
     cta: 'Keep Me Cool',
+    ctaSub: 'Schedule Cooling Service',
   },
   {
     id: 'heating',
@@ -109,29 +109,31 @@ export const services = [
     blurb:
       'Reliable heat when the temperature drops, from same-day furnace repair to modern heat pumps that stay efficient through the cold months.',
     items: [
-      'Furnace Repair',
-      'Heat Pumps',
-      'Heating Installation',
-      'Heating Maintenance',
-      'High-Efficiency Heating',
+      { label: 'Furnace Repair', detail: 'Same-day diagnosis and repair when the heat won’t come on.' },
+      { label: 'Heat Pumps', detail: 'Efficient heating and cooling from a single system.' },
+      { label: 'Heating Installation', detail: 'New equipment sized and installed for your actual home.' },
+      { label: 'Heating Maintenance', detail: 'A seasonal check-up before the cold months arrive.' },
+      { label: 'High-Efficiency Heating', detail: 'Modern furnaces that stay efficient through deep cold.' },
     ],
     cta: 'Warm My Home',
+    ctaSub: 'Schedule Heating Service',
   },
   {
     id: 'air-quality',
-    headline: 'BREATHE BETTER.',
+    headline: 'CLEAN IT.',
     focus: 'Indoor Air Quality',
     accent: 'fresh',
     blurb:
       'Dust, allergens, humidity and stale air are comfort problems too. We treat the air itself, not just its temperature.',
     items: [
-      'Air Purification',
-      'Whole-Home Filtration',
-      'Humidity Control',
-      'Dehumidification',
-      'Duct Services',
+      { label: 'Air Purification', detail: 'Active purification that reduces airborne allergens and odors.' },
+      { label: 'Whole-Home Filtration', detail: 'Cleaner air delivered through your existing ductwork.' },
+      { label: 'Humidity Control', detail: 'Balanced humidity so the air feels right, not sticky or dry.' },
+      { label: 'Dehumidification', detail: 'Targeted moisture removal for damp rooms and basements.' },
+      { label: 'Duct Services', detail: 'Cleaning and sealing so conditioned air isn’t wasted in transit.' },
     ],
     cta: 'Improve My Air',
+    ctaSub: 'Schedule Air Quality Service',
   },
 ]
 

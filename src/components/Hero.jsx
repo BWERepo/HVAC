@@ -137,7 +137,7 @@ export default function Hero() {
   const parallax = useParallax(0.18)
 
   return (
-    <section id="top" className="relative isolate flex min-h-dvh flex-col justify-center overflow-clip pt-10 pb-24 sm:pt-16">
+    <section id="top" className="relative isolate flex min-h-[88dvh] flex-col justify-center overflow-clip pt-2 pb-16 sm:pt-4">
       {/* --- Background stack --- */}
       <div className="absolute inset-0 -z-10">
         <div

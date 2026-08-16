@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { usePrefersReducedMotion } from '../lib/hooks'
 import Button from './ui/Button'
 import Icon from './ui/Icon'
@@ -64,6 +65,8 @@ function ParticleFilter() {
 export default function ServiceExperience({ service, index, onSchedule }) {
   const accent = accentVar[service.accent]
   const flipped = index % 2 === 1
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeItem = service.items[activeIndex]
 
   return (
     <section
@@ -91,8 +94,14 @@ export default function ServiceExperience({ service, index, onSchedule }) {
           <Reveal y={30}>
             <div className="relative overflow-hidden rounded-[2rem] border border-line shadow-lift">
               <Scene
+                // `activeItem.src`/`activeItem.alt` are the per-item photography
+                // slot: once real photos are sourced, add `src`/`alt` to each
+                // entry in `services[].items` in site.js and this swaps to a
+                // real <img> automatically, per hovered/focused item, with no
+                // layout change required.
                 variant={sceneFor[service.id]}
-                alt={altFor[service.id]}
+                src={activeItem.src}
+                alt={activeItem.alt || altFor[service.id]}
                 ratio="4 / 3"
               />
               {service.id === 'air-quality' && <ParticleFilter />}
@@ -153,33 +162,59 @@ export default function ServiceExperience({ service, index, onSchedule }) {
               {service.blurb}
             </Reveal>
 
-            {/* A list, not a grid of cards — this reads as a capability set. */}
+            {/* An interactive showcase, not a static menu — hovering or
+                focusing an item highlights it and reveals its one-line
+                detail below the list. */}
             <ul className="mt-10 max-w-lg">
-              {service.items.map((item, i) => (
-                <Reveal
-                  as="li"
-                  key={item}
-                  delay={180 + i * 55}
-                  className="group flex items-center gap-4 border-t border-line py-4 last:border-b"
-                >
-                  <span
-                    className="tnum font-display text-xs font-semibold tabular-nums"
-                    style={{ color: accent }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="flex-1 text-[1.05rem] font-medium text-ink transition-transform duration-300 group-hover:translate-x-1">
-                    {item}
-                  </span>
-                  <Icon
-                    name="check"
-                    size={17}
-                    className="opacity-30 transition-opacity group-hover:opacity-70"
-                    style={{ color: accent }}
-                  />
-                </Reveal>
-              ))}
+              {service.items.map((item, i) => {
+                const isActive = activeIndex === i
+                return (
+                  <Reveal as="li" key={item.label} delay={180 + i * 55}>
+                    <button
+                      type="button"
+                      onMouseEnter={() => setActiveIndex(i)}
+                      onFocus={() => setActiveIndex(i)}
+                      className="group flex w-full cursor-pointer items-center gap-4 border-t border-line py-4 text-left last:border-b"
+                    >
+                      <span
+                        className="tnum font-display text-xs font-semibold tabular-nums transition-opacity"
+                        style={{ color: accent, opacity: isActive ? 1 : 0.55 }}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span
+                        className="flex-1 text-[1.05rem] transition-all duration-300"
+                        style={{
+                          fontWeight: isActive ? 700 : 500,
+                          color: isActive ? accent : undefined,
+                          transform: isActive ? 'translateX(4px)' : undefined,
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                      <Icon
+                        name="check"
+                        size={17}
+                        className="transition-opacity"
+                        style={{ color: accent, opacity: isActive ? 0.85 : 0.3 }}
+                      />
+                    </button>
+                  </Reveal>
+                )
+              })}
             </ul>
+
+            {/* Reveal panel for the active item's detail — same element for
+                hover and keyboard focus, so this is never mouse-only. */}
+            <p
+              aria-live="polite"
+              className="mt-4 min-h-[1.5em] max-w-lg text-sm leading-relaxed text-ink-soft"
+            >
+              <span className="font-semibold" style={{ color: accent }}>
+                {activeItem.label}:{' '}
+              </span>
+              {activeItem.detail}
+            </p>
 
             <Reveal delay={460} className="mt-10">
               <Button
@@ -187,6 +222,7 @@ export default function ServiceExperience({ service, index, onSchedule }) {
                 size="lg"
                 onClick={onSchedule}
                 iconRight="arrowRight"
+                subLabel={service.ctaSub}
               >
                 {service.cta}
               </Button>
