@@ -13,6 +13,7 @@ import MobileActionBar from './components/MobileActionBar'
 import ProblemSelector from './components/ProblemSelector'
 import ScheduleBottomSheet from './components/ScheduleBottomSheet'
 import ServiceArea from './components/ServiceArea'
+import FieldPhotos from './components/FieldPhotos'
 import ServiceGrid from './components/ServiceGrid'
 import SocialRail from './components/SocialRail'
 import TeamSection from './components/TeamSection'
@@ -48,6 +49,7 @@ export default function App() {
         <TrustStats />
         <ProblemSelector onSchedule={openSheet} />
         <ServiceGrid />
+        <FieldPhotos />
         <EstimateWizard />
         <Testimonials />
         <ServiceArea />
