@@ -45,7 +45,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative isolate overflow-clip">
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_44%]">
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_56%]">
         {/* ---------------- Left: text panel ---------------- */}
         <div className="relative isolate flex min-h-[70dvh] flex-col justify-center overflow-clip bg-canvas px-5 py-16 sm:px-8 lg:min-h-[88dvh] lg:px-12 xl:pl-20">
           {/* Oversized ghost numeral — an editorial type moment bleeding off
