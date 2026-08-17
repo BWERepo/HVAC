@@ -1,20 +1,79 @@
 # Precision Comfort HVAC Demo — Project Status
 
-Last updated: 2026-08-16 (end of session).
+Last updated: 2026-08-16 (end of session, latest).
 
-**This session followed up the v1.0.0 redesign milestone with a targeted mobile-formatting
-review and fix pass** — a background-agent audit of the whole `src/components/` tree for
-small-screen layout bugs, followed by four incremental checkpoints fixing everything it
-found. Live at **<https://hvac.businesswebexpress.com>**, repo
-**<https://github.com/BWERepo/HVAC>** (`main`) at commit `b3b6fbf`, currently **v1.0.3**
-(Version ID `c9aad14c-cddb-41c2-ab2b-12ced0454c62`). 3 checkpoint commits landed this
-session (`ea7c561` → `b3b6fbf`), each one built → deployed → committed → pushed per the
-user's standing "always deploy after changes" preference — the live site should always
-match `main`.
+**This session rebuilt the hero into a true two-column split** (text panel left, photo
+panel right) to match a reference layout the user supplied (a dental-site screenshot),
+replacing the full-bleed-photo-with-scrim hero from earlier sessions — then widened the
+photo panel further on direct follow-up. Live at **<https://hvac.businesswebexpress.com>**,
+repo **<https://github.com/BWERepo/HVAC>** (`main`) at commit `76845d3`, currently
+**v1.1.1** (Version ID `e6abb3eb-a1fc-4f25-8a44-76c2d2e7be5f`). 2 checkpoint commits landed
+this session (`77e4032`, `76845d3`), each built → deployed → committed → pushed per the
+user's standing "always deploy after changes" preference — the live site matches `main`.
 
 ---
 
-## This session's work (2026-08-16, continuing from v1.0.0)
+## This session's work (2026-08-16, hero layout redesign)
+
+**Prompt**: the user pasted two screenshots side by side — a reference dental-clinic site
+with a classic split hero (dark text panel on the left, large patient photo filling the
+right, a small floating "at a glance" hours/address card overlapping the photo's bottom
+corner) and the HVAC site's *then-current* hero (full-bleed family photo behind the whole
+viewport, with a solid-to-transparent scrim over the left ~55% so the headline/CTA text
+stayed legible on top of it) — and asked to "change layout of precision comfort to be
+same as sample dental with picture on right and text on left."
+
+**What changed — `src/components/Hero.jsx` (full rewrite):**
+- Replaced the single full-bleed `<section>` with a `grid lg:grid-cols-[minmax(0,1fr)_X%]`
+  of two real boxes: a left text panel (`bg-canvas` solid background, all the existing
+  copy/CTAs) and a right photo panel (`Scene` component in its `src`/`ratio="auto"` mode,
+  `object-cover`, fills the box edge-to-edge).
+- **No legibility scrim on the photo anymore** — the old hero needed one because text sat
+  directly on top of the image; now the two are separate boxes side by side, so the photo
+  renders at full strength/saturation, same as the reference.
+- Added a new eyebrow line above the headline (`{company.region} · {company.tagline}`,
+  e.g. "Knoxville area · Heating, Cooling & Indoor Air Quality") — **derived from existing
+  `site.js` fields**, not a new data field, matching the reference's "KNOXVILLE, TN ·
+  DENTAL CLINIC" eyebrow pattern without inventing content.
+- **Removed** (had no clean equivalent once the photo stopped being a full-bleed
+  background): the oversized ghost "72°" numeral bleeding off the left edge, the ambient
+  sun-colored accent wedge in the top-right, and the four drifting-airflow SVG paths. All
+  three were sized/positioned specifically for the old full-bleed composition.
+- **Not added**: the reference's floating "AT A GLANCE" card (per-day hours + street
+  address overlapping the photo's bottom-right corner). `site.js` has no per-day hours
+  breakdown or street address field — only `company.hours` (a single sentence) and no
+  address at all — and per this project's own "do not invent facts" rule, those weren't
+  fabricated. **If a real hours/address structure gets added to `site.js` later, that
+  overlay card is a reasonable follow-up**, not something to build with placeholder data.
+- Mobile: stacks to a single column below `lg` (photo panel on top, `min-h-[46dvh]`); text
+  panel `min-h-[70dvh]` on mobile / `88dvh` on `lg+`. Verified no horizontal overflow at
+  1265px viewport via `getComputedStyle`/`getBoundingClientRect` (see verification note
+  below).
+
+**Follow-up in the same session**: user said "make picture wider." Changed the grid track
+split from `minmax(0,1fr)_44%` to `minmax(0,1fr)_56%` (one-line change, photo panel gains
+12 percentage points, text panel narrows to match). Shipped as its own patch checkpoint
+rather than folded into the first commit, since the first was already built/deployed/
+pushed before this request arrived.
+
+**Commits/deploys:**
+1. `77e4032` — v1.1.0, "Hero: two-column split layout, photo right." Build clean, deployed,
+   Version ID `40aeda32-b79c-4bf2-91d1-5697f8b00374`.
+2. `76845d3` — v1.1.1, "Hero: widen photo panel" (44% → 56%). Build clean, deployed,
+   Version ID `e6abb3eb-a1fc-4f25-8a44-76c2d2e7be5f` ← **live**.
+
+**Per explicit user instruction mid-session ("dont verify in browser. i can do that"),
+no in-agent screenshot/visual verification was attempted for either change** — layout
+correctness was confirmed structurally (grid column widths, box positions via
+`getBoundingClientRect`, `object-fit: cover` on the image, no horizontal overflow) rather
+than visually. The user is doing visual QA on the live deploy directly. **Worth a manual
+look next session** to confirm the split reads right at a glance, especially the eyebrow
+line, the mobile stacking order, and whether the removed "72°"/accent-wedge decorative
+elements are missed.
+
+---
+
+## Earlier session (2026-08-16, mobile-formatting review pass)
 
 A background `Explore`-style agent reviewed every file in `src/components/` and
 `src/components/ui/` plus `src/index.css` specifically for mobile (<640px) layout bugs —
@@ -80,7 +139,8 @@ demonstrate something BWE could customise for that owner's real business.**
 ## What it is
 
 A single-page React site for **"Precision Comfort Heating & Air"**, a **fictional** HVAC
-company. Interactive pieces, in current page order: a full-bleed photographic hero, a
+company. Interactive pieces, in current page order: a two-column split hero (text panel
+left, photo panel right — 56% width as of this session), a
 draggable 65–80°F thermostat further down the page, animated trust stats with a Google
 reviews badge, a **4-step signature conversion flow** (problem → urgency → ZIP →
 contact), a 7-item service catalog grid, a 3-photo "In the field" technician gallery, a
@@ -370,12 +430,14 @@ the custom domain `hvac.businesswebexpress.com`.
 
 ## Deploy history (most recent first)
 
+- `76845d3` — v1.1.1, deployed, Version ID `e6abb3eb-a1fc-4f25-8a44-76c2d2e7be5f` ← **live**
+- `77e4032` — v1.1.0, deployed, Version ID `40aeda32-b79c-4bf2-91d1-5697f8b00374`
 - `b3b6fbf` — v1.0.3, deployed, Version ID `c9aad14c-cddb-41c2-ab2b-12ced0454c62`
 - `16ef54f` — v1.0.2, deployed, Version ID `31e87ec0-88c6-4c54-b398-49e9241bf9da`
 - `ea7c561` — v1.0.1, deployed, Version ID `13483012-c2cc-4266-8a78-ecc7c5856b1d`
 - `45afde6` — v1.0.0 / v0.6.1 (both bumps landed in this one commit), deployed twice,
   Version IDs `8c110b26-4001-4fc4-b3b0-47e2af719441` (v1.0.0, live) and
-  `9748917d-a1f3-4196-82ba-3e24bf922367` (v0.6.1, superseded) ← **live**
+  `9748917d-a1f3-4196-82ba-3e24bf922367` (v0.6.1, superseded)
 - `f4c5e7d` — v0.6.0, deployed, Version ID `370aa8a2-bfdd-4428-a24e-8809bd6808fd`
 - `0ec5892` — v0.5.2, deployed, Version ID `61f6a7b7-a7cd-4afc-bd16-b9721c98b7f4`
   (v0.5.1 deployed under Version ID `c17bf6c2-1a0e-471b-be6d-0495db14f0e5`, not
